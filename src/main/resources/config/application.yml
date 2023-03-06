@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/survey?createDatabaseIfNotExist=true
+    username: root
+    password: guidona
+  jpa:
+    hibernate.ddl-auto: update
+    generate-ddl: true
+    show-sql: true
