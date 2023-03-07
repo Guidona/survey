@@ -12,7 +12,6 @@ import org.mapstruct.*;
 @Mapper(componentModel = "spring")
 public interface OptionQCMMapper extends EntityMapper<OptionQCMDTO, OptionQCM> {
     @Mapping(target = "qcm", source = "qcm", qualifiedByName = "qCMId")
-    @Mapping(target = "qcm", source = "qcm", qualifiedByName = "qCMId")
     OptionQCMDTO toDto(OptionQCM s);
 
     @Named("qCMId")

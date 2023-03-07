@@ -33,9 +33,6 @@ public class FormulaireResource {
 
     private static final String ENTITY_NAME = "formulaire";
 
-    @Value("${jhipster.clientApp.name}")
-    private String applicationName;
-
     private final FormulaireService formulaireService;
 
     private final FormulaireRepository formulaireRepository;

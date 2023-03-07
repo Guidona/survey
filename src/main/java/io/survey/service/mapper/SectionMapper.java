@@ -12,7 +12,6 @@ import org.mapstruct.*;
 @Mapper(componentModel = "spring")
 public interface SectionMapper extends EntityMapper<SectionDTO, Section> {
     @Mapping(target = "questionnaire", source = "questionnaire", qualifiedByName = "questionnaireId")
-    @Mapping(target = "questionnaire", source = "questionnaire", qualifiedByName = "questionnaireId")
     SectionDTO toDto(Section s);
 
     @Named("questionnaireId")

@@ -13,7 +13,6 @@ import org.mapstruct.*;
 public interface QuestionMapper extends EntityMapper<QuestionDTO, Question> {
     @Mapping(target = "question", source = "question", qualifiedByName = "questionId")
     @Mapping(target = "section", source = "section", qualifiedByName = "sectionId")
-    @Mapping(target = "section", source = "section", qualifiedByName = "sectionId")
     QuestionDTO toDto(Question s);
 
     @Named("questionId")

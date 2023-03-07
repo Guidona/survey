@@ -11,9 +11,6 @@ import java.io.Serializable;
 
 @Entity
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 @DiscriminatorValue("QuestionOuverte")
 @SuppressWarnings("common-java:DuplicatedBlocks")
 public class QuestionOuverte extends Question {
