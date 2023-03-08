@@ -67,8 +67,6 @@ public class OptionQCMDTO implements Serializable {
         return "OptionQCMDTO{" +
             "id=" + getId() +
             ", libelle='" + getLibelle() + "'" +
-            ", qcm=" + getQcm() +
-            ", qcm=" + getQcm() +
             "}";
     }
 }

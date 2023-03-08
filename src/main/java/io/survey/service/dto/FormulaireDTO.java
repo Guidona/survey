@@ -1,7 +1,9 @@
 package io.survey.service.dto;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A DTO for the {@link io.survey.model.Formulaire} entity.
@@ -12,6 +14,8 @@ public class FormulaireDTO implements Serializable {
     private Long id;
 
     private String libelle;
+
+    private Set<SectionDTO> sections = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -27,6 +31,14 @@ public class FormulaireDTO implements Serializable {
 
     public void setLibelle(String libelle) {
         this.libelle = libelle;
+    }
+
+    public Set<SectionDTO> getSections() {
+        return sections;
+    }
+
+    public void setSections(Set<SectionDTO> sections) {
+        this.sections = sections;
     }
 
     @Override

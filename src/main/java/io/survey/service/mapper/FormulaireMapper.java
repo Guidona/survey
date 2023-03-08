@@ -7,5 +7,13 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity {@link Formulaire} and its DTO {@link FormulaireDTO}.
  */
-@Mapper(componentModel = "spring")
-public interface FormulaireMapper extends EntityMapper<FormulaireDTO, Formulaire> {}
+@Mapper(componentModel = "spring", uses = {SectionMapper.class})
+public interface FormulaireMapper extends EntityMapper<FormulaireDTO, Formulaire> {
+
+//    @Mapping(target = "sectionsDTO", source = "sections")
+//    FormulaireDTO toDto(Formulaire s);
+//
+//    @Mapping(target = "sections", source = "sectionsDTO")
+//    Formulaire toEntity(FormulaireDTO s);
+
+}

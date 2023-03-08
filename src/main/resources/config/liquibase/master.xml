@@ -13,8 +13,8 @@
     <include file="config/liquibase/changelog/20230306155951_added_entity_Questionnaire.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20230306155952_added_entity_Section.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20230306155953_added_entity_Question.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20230306155954_added_entity_QuestionOuverte.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20230306155955_added_entity_QCM.xml" relativeToChangelogFile="false"/>
+<!--    <include file="config/liquibase/changelog/20230306155954_added_entity_QuestionOuverte.xml" relativeToChangelogFile="false"/>-->
+<!--    <include file="config/liquibase/changelog/20230306155955_added_entity_QCM.xml" relativeToChangelogFile="false"/>-->
     <include file="config/liquibase/changelog/20230306155956_added_entity_OptionQCM.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20230306155957_added_entity_Formulaire.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20230306155958_added_entity_LigneFormulaire.xml" relativeToChangelogFile="false"/>

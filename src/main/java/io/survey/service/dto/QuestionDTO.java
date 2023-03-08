@@ -110,8 +110,6 @@ public class QuestionDTO implements Serializable {
             ", code='" + getCode() + "'" +
             ", obligatoire='" + getObligatoire() + "'" +
             ", question=" + getQuestion() +
-            ", section=" + getSection() +
-            ", section=" + getSection() +
             "}";
     }
 }

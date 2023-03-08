@@ -33,11 +33,15 @@ public class Section implements Serializable {
     private Integer ordre;
 
     @OneToMany(mappedBy = "section")
-    @JsonIgnoreProperties(value = { "question", "section", "section" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "question", "section" }, allowSetters = true)
     private Set<Question> questions = new HashSet<>();
 
     @ManyToOne
     @JsonIgnoreProperties(value = { "sections" }, allowSetters = true)
     private Questionnaire questionnaire;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = { "questions", "section" })
+    private Section section;
 
 }

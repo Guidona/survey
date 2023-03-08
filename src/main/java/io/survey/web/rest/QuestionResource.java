@@ -2,6 +2,7 @@ package io.survey.web.rest;
 
 import io.survey.repository.QuestionRepository;
 import io.survey.service.QuestionService;
+import io.survey.service.dto.FormulaireDTO;
 import io.survey.service.dto.QuestionDTO;
 import io.survey.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
@@ -9,16 +10,19 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+
+import io.swagger.v3.oas.annotations.Hidden;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 /**
  * REST controller for managing {@link io.survey.model.Question}.
@@ -47,6 +51,7 @@ public class QuestionResource {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new questionDTO, or with status {@code 400 (Bad Request)} if the question has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
+    @Hidden
     @PostMapping("/questions")
     public ResponseEntity<QuestionDTO> createQuestion(@RequestBody QuestionDTO questionDTO) throws URISyntaxException {
         log.debug("REST request to save Question : {}", questionDTO);
@@ -69,6 +74,7 @@ public class QuestionResource {
      * or with status {@code 500 (Internal Server Error)} if the questionDTO couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
+    @Hidden
     @PutMapping("/questions/{id}")
     public ResponseEntity<QuestionDTO> updateQuestion(@PathVariable(value = "id", required = false) final Long id,
                                                       @RequestBody QuestionDTO questionDTO) throws URISyntaxException {
@@ -101,6 +107,7 @@ public class QuestionResource {
      * or with status {@code 500 (Internal Server Error)} if the questionDTO couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
+    @Hidden
     @PatchMapping(value = "/questions/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<QuestionDTO> partialUpdateQuestion(@PathVariable(value = "id", required = false) final Long id,
                                                              @RequestBody QuestionDTO questionDTO) throws URISyntaxException {
@@ -128,6 +135,14 @@ public class QuestionResource {
      * @param pageable the pagination information.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of questions in body.
      */
+    @Operation(summary = "Operation pour lire une liste de questions present en base de donnees")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successful response.", content = {
+                    @Content(schema = @Schema(implementation = FormulaireDTO.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Internal server error.")
+    })
     @GetMapping("/questions")
     public ResponseEntity<List<QuestionDTO>> getAllQuestions(Pageable pageable) {
         log.debug("REST request to get a page of Questions");
@@ -141,6 +156,15 @@ public class QuestionResource {
      * @param id the id of the questionDTO to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the questionDTO, or with status {@code 404 (Not Found)}.
      */
+    @Operation(summary = "Operation pour recuperer une question en base de donnees", description = "" +
+            "Permet de recuperer une question en base de donnee juste sur la base de son identifiant.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successful response.", content = {
+                    @Content(schema = @Schema(implementation = FormulaireDTO.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Internal server error.")
+    })
     @GetMapping("/questions/{id}")
     public ResponseEntity<QuestionDTO> getQuestion(@PathVariable Long id) {
         log.debug("REST request to get Question : {}", id);
@@ -154,6 +178,7 @@ public class QuestionResource {
      * @param id the id of the questionDTO to delete.
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
+    @Hidden
     @DeleteMapping("/questions/{id}")
     public ResponseEntity<Void> deleteQuestion(@PathVariable Long id) {
         log.debug("REST request to delete Question : {}", id);

@@ -1,6 +1,9 @@
 package io.survey.service;
 
 import io.survey.service.dto.FormulaireDTO;
+
+import java.text.Normalizer;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -40,6 +43,8 @@ public interface FormulaireService {
      * @return the list of entities.
      */
     Page<FormulaireDTO> findAll(Pageable pageable);
+
+    List<FormulaireDTO> findAll();
 
     /**
      * Get the "id" formulaire.

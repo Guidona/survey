@@ -7,7 +7,7 @@ import java.util.Objects;
  * A DTO for the {@link io.survey.model.QCM} entity.
  */
 @SuppressWarnings("common-java:DuplicatedBlocks")
-public class QCMDTO implements Serializable {
+public class QCMDTO extends QuestionDTO implements Serializable {
 
     private Long id;
 

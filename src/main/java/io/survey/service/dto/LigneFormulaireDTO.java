@@ -75,10 +75,8 @@ public class LigneFormulaireDTO implements Serializable {
     public String toString() {
         return "LigneFormulaireDTO{" +
             "id=" + getId() +
-            ", formulaire=" + getFormulaire() +
             ", question=" + getQuestion() +
             ", reponse=" + getReponse() +
-            ", formulaire=" + getFormulaire() +
             "}";
     }
 }

@@ -5,6 +5,8 @@ import io.survey.repository.FormulaireRepository;
 import io.survey.service.FormulaireService;
 import io.survey.service.dto.FormulaireDTO;
 import io.survey.service.mapper.FormulaireMapper;
+
+import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -67,6 +69,12 @@ public class FormulaireServiceImpl implements FormulaireService {
     public Page<FormulaireDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Formulaires");
         return formulaireRepository.findAll(pageable).map(formulaireMapper::toDto);
+    }
+
+    @Override
+    public List<FormulaireDTO> findAll() {
+        log.debug("Request to get all Formulaires");
+        return formulaireMapper.toDto(formulaireRepository.findAll());
     }
 
     @Override

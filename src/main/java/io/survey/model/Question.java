@@ -39,11 +39,11 @@ public class Question implements Serializable{
     private Boolean obligatoire;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "question", "section", "section" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "question", "section" })
     private Question question;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "questions", "questionnaire", "questionnaire" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "questions", "questionnaire" })
     private Section section;
 
 }

@@ -13,6 +13,8 @@ public class QuestionnaireDTO implements Serializable {
 
     private String name;
 
+    private Integer numero;
+
     public Long getId() {
         return id;
     }
@@ -27,6 +29,14 @@ public class QuestionnaireDTO implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getNumero() {
+        return numero;
+    }
+
+    public void setNumero(Integer numero) {
+        this.numero = numero;
     }
 
     @Override

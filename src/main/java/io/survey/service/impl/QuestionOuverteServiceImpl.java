@@ -43,7 +43,7 @@ public class QuestionOuverteServiceImpl implements QuestionOuverteService {
     public QuestionOuverteDTO update(QuestionOuverteDTO questionOuverteDTO) {
         log.debug("Request to update QuestionOuverte : {}", questionOuverteDTO);
         QuestionOuverte questionOuverte = questionOuverteMapper.toEntity(questionOuverteDTO);
-        // no save call needed as we have no fields that can be updated
+        questionOuverte = questionOuverteRepository.save(questionOuverte);
         return questionOuverteMapper.toDto(questionOuverte);
     }
 
@@ -58,8 +58,8 @@ public class QuestionOuverteServiceImpl implements QuestionOuverteService {
 
                 return existingQuestionOuverte;
             })
-            // .map(questionOuverteRepository::save)
-            .map(questionOuverteMapper::toDto);
+            .map(questionOuverteMapper::toDto)
+                .map(this::save);
     }
 
     @Override

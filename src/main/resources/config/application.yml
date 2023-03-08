@@ -8,3 +8,15 @@ spring:
     hibernate.ddl-auto: update
     generate-ddl: true
     show-sql: true
+
+  liquibase:
+    enabled: true
+    change-log: classpath:config/liquibase/master.xml
+
+#server:
+#  ssl:
+#    key-store-type: JKS
+#    key-store: classpath:keystore/survey-app.jks
+#    key-store-password: survey
+#    key-alias: survey-app
+#    enabled: true

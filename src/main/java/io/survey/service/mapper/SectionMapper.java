@@ -9,9 +9,10 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity {@link Section} and its DTO {@link SectionDTO}.
  */
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = QuestionMapper.class)
 public interface SectionMapper extends EntityMapper<SectionDTO, Section> {
     @Mapping(target = "questionnaire", source = "questionnaire", qualifiedByName = "questionnaireId")
+    @Mapping(target = "question.question", ignore = true)
     SectionDTO toDto(Section s);
 
     @Named("questionnaireId")

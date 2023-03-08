@@ -32,4 +32,12 @@ public class Formulaire implements Serializable {
     @JsonIgnoreProperties(value = { "formulaire", "question", "reponse", "formulaire" }, allowSetters = true)
     private Set<LigneFormulaire> ligneFormulaires = new HashSet<>();
 
+    @ManyToMany
+    @JoinTable(
+            name = "formulaire_section",
+            joinColumns = { @JoinColumn(name = "formualaire_id", referencedColumnName = "id") },
+            inverseJoinColumns = { @JoinColumn(name = "section_id", referencedColumnName = "id") }
+    )
+    private Set<Section> sections = new HashSet<>();
+
 }

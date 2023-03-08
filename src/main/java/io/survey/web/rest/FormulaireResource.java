@@ -11,6 +11,12 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -50,6 +56,14 @@ public class FormulaireResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/formulaires")
+    @Operation(summary = "Operation pour creer un nouveau formulaire")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successful response.", content = {
+                    @Content(schema = @Schema(implementation = FormulaireDTO.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Not found."),
+            @ApiResponse(responseCode = "500", description = "Internal server error.")
+    })
     public ResponseEntity<FormulaireDTO> createFormulaire(@RequestBody FormulaireDTO formulaireDTO) throws URISyntaxException, BadRequestAlertException {
         log.debug("REST request to save Formulaire : {}", formulaireDTO);
         if (formulaireDTO.getId() != null) {

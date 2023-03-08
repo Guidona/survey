@@ -28,6 +28,9 @@ public class Questionnaire implements Serializable {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "numero")
+    private Integer numero;
+
     @OneToMany(mappedBy = "questionnaire")
     @JsonIgnoreProperties(value = { "questions", "questionnaire", "questionnaire" }, allowSetters = true)
     private Set<Section> sections = new HashSet<>();
