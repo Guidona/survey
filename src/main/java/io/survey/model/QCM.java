@@ -17,7 +17,6 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @DiscriminatorValue("QCM")
 @SuppressWarnings("common-java:DuplicatedBlocks")
 public class QCM extends Question {
@@ -26,4 +25,8 @@ public class QCM extends Question {
     @JsonIgnoreProperties(value = { "qcm" }, allowSetters = true)
     private Set<OptionQCM> optionsQCM = new HashSet<>();
 
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

@@ -33,7 +33,6 @@ public class QCMServiceImpl implements QCMService {
 
     @Override
     public QCMDTO save(QCMDTO qCMDTO) {
-        log.debug("Request to save QCM : {}", qCMDTO);
         QCM qCM = qCMMapper.toEntity(qCMDTO);
         qCM = qCMRepository.save(qCM);
         return qCMMapper.toDto(qCM);

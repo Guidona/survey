@@ -11,12 +11,24 @@ public class QCMDTO extends QuestionDTO implements Serializable {
 
     private Long id;
 
+    private SectionDTO section;
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @Override
+    public SectionDTO getSection() {
+        return section;
+    }
+
+    @Override
+    public void setSection(SectionDTO section) {
+        this.section = section;
     }
 
     @Override
@@ -40,11 +52,15 @@ public class QCMDTO extends QuestionDTO implements Serializable {
         return Objects.hash(this.id);
     }
 
-    // prettier-ignore
     @Override
     public String toString() {
         return "QCMDTO{" +
-            "id=" + getId() +
-            "}";
+                "id=" + id  +
+                ", libelle='" + getLibelle() + "'" +
+                ", ordre=" + getOrdre() +
+                ", code='" + getCode() + "'" +
+                ", obligatoire='" + getObligatoire() + "'" +
+                ", question=" + getQuestion() +
+                "}";
     }
 }
