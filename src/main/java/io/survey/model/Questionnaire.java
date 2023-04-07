@@ -15,7 +15,6 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class Questionnaire implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -27,9 +26,6 @@ public class Questionnaire implements Serializable {
 
     @Column(name = "name")
     private String name;
-
-    @Column(name = "numero")
-    private Integer numero;
 
     @OneToMany(mappedBy = "questionnaire")
     @JsonIgnoreProperties(value = { "questions", "questionnaire", "questionnaire" }, allowSetters = true)
