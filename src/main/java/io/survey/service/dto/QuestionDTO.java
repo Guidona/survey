@@ -1,5 +1,7 @@
 package io.survey.service.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -21,6 +23,7 @@ public class QuestionDTO implements Serializable {
 
     private QuestionDTO question;
 
+    @JsonIgnore
     private SectionDTO section;
 
     public Long getId() {
