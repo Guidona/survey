@@ -2,6 +2,7 @@ package io.survey.service.dto;
 
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A DTO for the {@link io.survey.model.Questionnaire} entity.
@@ -14,6 +15,8 @@ public class QuestionnaireDTO implements Serializable {
     private String name;
 
     private Integer numero;
+
+    private Set<SectionDTO> sections;
 
     public Long getId() {
         return id;
@@ -37,6 +40,14 @@ public class QuestionnaireDTO implements Serializable {
 
     public void setNumero(Integer numero) {
         this.numero = numero;
+    }
+
+    public Set<SectionDTO> getSections() {
+        return sections;
+    }
+
+    public void setSections(Set<SectionDTO> sections) {
+        this.sections = sections;
     }
 
     @Override
