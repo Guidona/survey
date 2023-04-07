@@ -39,7 +39,7 @@ public class Section implements Serializable {
     @JsonIgnoreProperties(value = { "sections" })
     private Questionnaire questionnaire;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JsonIgnoreProperties(value = { "questions", "section" })
     private Section section;
 

@@ -24,6 +24,8 @@ public class SectionDTO implements Serializable {
 
     private Set<QuestionDTO> questions = new HashSet<>();
 
+    private SectionDTO section;
+
     public Long getId() {
         return id;
     }
@@ -60,8 +62,16 @@ public class SectionDTO implements Serializable {
         return questions;
     }
 
-    public void setQuestionsDTO(Set<QuestionDTO> questions) {
+    public void setQuestions(Set<QuestionDTO> questions) {
         this.questions = questions;
+    }
+
+    public SectionDTO getSection() {
+        return section;
+    }
+
+    public void setSection(SectionDTO section) {
+        this.section = section;
     }
 
     @Override
