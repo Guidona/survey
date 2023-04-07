@@ -35,11 +35,11 @@ public class Section implements Serializable {
     @JsonIgnoreProperties(value = { "question", "section" }, allowSetters = true)
     private Set<Question> questions = new HashSet<>();
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = { "sections" }, allowSetters = true)
     private Questionnaire questionnaire;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = { "questions", "section" })
     private Section section;
 
