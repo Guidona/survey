@@ -28,7 +28,7 @@ public class Questionnaire implements Serializable {
     private String name;
 
     @OneToMany(mappedBy = "questionnaire")
-    @JsonIgnoreProperties(value = { "questionnaire", "section" })
+    //@JsonIgnoreProperties(value = { "questionnaire", "section" })
     private Set<Section> sections = new HashSet<>();
 
 }

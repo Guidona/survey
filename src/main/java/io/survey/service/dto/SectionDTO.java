@@ -19,8 +19,8 @@ public class SectionDTO implements Serializable {
 
     private Integer ordre;
 
-    @JsonIgnore
-    private QuestionnaireDTO questionnaire;
+    //@JsonIgnore
+    //private QuestionnaireDTO questionnaire;
 
     private Set<QuestionDTO> questions = new HashSet<>();
 
@@ -50,13 +50,13 @@ public class SectionDTO implements Serializable {
         this.ordre = ordre;
     }
 
-    public QuestionnaireDTO getQuestionnaire() {
-        return questionnaire;
-    }
-
-    public void setQuestionnaire(QuestionnaireDTO questionnaire) {
-        this.questionnaire = questionnaire;
-    }
+//    public QuestionnaireDTO getQuestionnaire() {
+//        return questionnaire;
+//    }
+//
+//    public void setQuestionnaire(QuestionnaireDTO questionnaire) {
+//        this.questionnaire = questionnaire;
+//    }
 
     public Set<QuestionDTO> getQuestions() {
         return questions;
@@ -102,8 +102,6 @@ public class SectionDTO implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", ordre=" + getOrdre() +
-            ", questionnaire=" + getQuestionnaire() +
-            ", questionnaire=" + getQuestionnaire() +
             "}";
     }
 }

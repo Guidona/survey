@@ -38,12 +38,12 @@ public class Question implements Serializable{
     @Column(name = "obligatoire")
     private Boolean obligatoire;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JsonIgnoreProperties(value = { "question", "section" })
     private Question question;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "questions", "questionnaire" })
+    @ManyToOne
+    @JsonIgnoreProperties(value = { "questions" })
     private Section section;
 
 }
