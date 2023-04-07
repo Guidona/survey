@@ -1,5 +1,7 @@
 package io.survey.service.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
@@ -17,6 +19,7 @@ public class SectionDTO implements Serializable {
 
     private Integer ordre;
 
+    @JsonIgnore
     private QuestionnaireDTO questionnaire;
 
     private Set<QuestionDTO> questions = new HashSet<>();
