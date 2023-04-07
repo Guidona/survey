@@ -11,12 +11,12 @@ import org.mapstruct.*;
  */
 @Mapper(componentModel = "spring", uses = QuestionMapper.class)
 public interface SectionMapper extends EntityMapper<SectionDTO, Section> {
-    @Mapping(target = "questionnaire", source = "questionnaire", qualifiedByName = "questionnaireId")
+//    @Mapping(target = "questionnaire", source = "questionnaire", qualifiedByName = "questionnaireId")
     @Mapping(target = "question.question", ignore = true)
     SectionDTO toDto(Section s);
 
-    @Named("questionnaireId")
-    @BeanMapping(ignoreByDefault = true)
-    @Mapping(target = "id", source = "id")
-    QuestionnaireDTO toDtoQuestionnaireId(Questionnaire questionnaire);
+//    @Named("questionnaireId")
+//    @BeanMapping(ignoreByDefault = true)
+//    @Mapping(target = "id", source = "id")
+//    QuestionnaireDTO toDtoQuestionnaireId(Questionnaire questionnaire);
 }
