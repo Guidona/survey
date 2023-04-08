@@ -14,10 +14,9 @@ import org.mapstruct.*;
 @Mapper(componentModel = "spring")
 public interface QCMMapper extends EntityMapper<QCMDTO, QCM> {
 
-    @Mapping(target = "question", source = "question", qualifiedByName = "questionId")
-    @Mapping(target = "section", source = "section", qualifiedByName = "sectionId")
+//    @Mapping(target = "question", source = "question", qualifiedByName = "questionId")
+    @Mapping(target = "section", ignore = true)
     QuestionDTO toDto(Question s);
-
     @Named("questionId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")

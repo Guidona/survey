@@ -13,9 +13,6 @@ public class OptionQCMDTO implements Serializable {
 
     private String libelle;
 
-    private QCMDTO qcm;
-
-
     public Long getId() {
         return id;
     }
@@ -30,14 +27,6 @@ public class OptionQCMDTO implements Serializable {
 
     public void setLibelle(String libelle) {
         this.libelle = libelle;
-    }
-
-    public QCMDTO getQcm() {
-        return qcm;
-    }
-
-    public void setQcm(QCMDTO qcm) {
-        this.qcm = qcm;
     }
 
     @Override
