@@ -29,17 +29,13 @@ public interface SectionMapper extends EntityMapper<SectionDTO, Section> {
 
     @AfterMapping
     default void enrichDTOWithQuestion(Section section, @MappingTarget SectionDTO sectionDTO) {
+        ObjectMapper mapper = new ObjectMapper();
         sectionDTO.setQuestionsObject(
                 section.getQuestions().stream().map(question -> {
-                    if (question instanceof QCM) {
-                        return new ObjectMapper()
-                                .convertValue((QCM) question, new TypeReference<Map<String, Object>>() {
-                                });
-
-                    }
-                    return new ObjectMapper()
-                            .convertValue((QuestionOuverte) question, new TypeReference<Map<String, Object>>() {
-                            });
+                    if (question instanceof QCM)
+                        return mapper.convertValue((QCM) question, new TypeReference<Map<String, Object>>() {});
+                    else
+                        return mapper.convertValue((QuestionOuverte) question, new TypeReference<Map<String, Object>>() {});
                 }).collect(Collectors.toList()));
     }
 
