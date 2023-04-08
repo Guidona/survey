@@ -30,9 +30,9 @@ public interface SectionMapper extends EntityMapper<SectionDTO, Section> {
     @AfterMapping
     default void enrichDTOWithQuestion(Section section, @MappingTarget SectionDTO sectionDTO) {
         ObjectMapper mapper = new ObjectMapper();
+        System.out.println("size is ==> " + section.getQuestions().size());
         sectionDTO.setQuestionsObject(
                 section.getQuestions().stream().map(question -> {
-                    System.out.println(question);
                     if (question instanceof QCM)
                         return mapper.convertValue((QCM) question, new TypeReference<Map<String, Object>>() {});
                     else
