@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
  */
 @Mapper(componentModel = "spring", uses = QuestionMapper.class)
 public interface SectionMapper extends EntityMapper<SectionDTO, Section> {
-    @Mapping(target = "section.section", ignore = true)
+    //@Mapping(target = "section.section.section", ignore = true)
     SectionDTO toDto(Section s);
 
     @Named("questionnaireId")
@@ -30,7 +30,6 @@ public interface SectionMapper extends EntityMapper<SectionDTO, Section> {
     @AfterMapping
     default void enrichDTOWithQuestion(Section section, @MappingTarget SectionDTO sectionDTO) {
         ObjectMapper mapper = new ObjectMapper();
-        System.out.println("size is ==> " + section.getQuestions().size());
         sectionDTO.setQuestionsObject(
                 section.getQuestions().stream().map(question -> {
                     if (question instanceof QCM)

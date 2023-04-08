@@ -2,10 +2,7 @@ package io.survey.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -40,7 +37,6 @@ public class Question implements Serializable{
     private Boolean obligatoire;
 
     @ManyToOne
-    @JsonBackReference
     private Question question;
 
     @ManyToOne

@@ -19,7 +19,7 @@ public class SectionDTO implements Serializable {
 
     private List<Map<String, Object>> questionsObject = new ArrayList<>();
 
-    private SectionDTO section;
+    private List<SectionDTO> sections;
 
     public Long getId() {
         return id;
@@ -45,12 +45,12 @@ public class SectionDTO implements Serializable {
         this.ordre = ordre;
     }
 
-    public SectionDTO getSection() {
-        return section;
+    public List<SectionDTO> getSections() {
+        return sections;
     }
 
-    public void setSection(SectionDTO section) {
-        this.section = section;
+    public void setSections(List<SectionDTO> sections) {
+        this.sections = sections;
     }
 
     public List<Map<String, Object>> getQuestionsObject() {

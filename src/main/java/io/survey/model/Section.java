@@ -34,9 +34,8 @@ public class Section implements Serializable {
     @Column(name = "ordre")
     private Integer ordre;
 
-    @OneToMany(mappedBy = "section")
-    @JsonManagedReference
-    private Set<Question> questions = new HashSet<>();
+    @OneToMany(mappedBy = "section", fetch = FetchType.EAGER)
+    private List<Question> questions = new ArrayList<>();
 
     @ManyToOne
     @JsonBackReference
@@ -45,6 +44,10 @@ public class Section implements Serializable {
     @ManyToOne
     @JsonBackReference
     private Section section;
+
+
+    @OneToMany(mappedBy = "section")
+    private List<Section> sections = new ArrayList<>();
 
     @Override
     public String toString() {
