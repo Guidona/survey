@@ -32,6 +32,7 @@ public interface SectionMapper extends EntityMapper<SectionDTO, Section> {
         ObjectMapper mapper = new ObjectMapper();
         sectionDTO.setQuestionsObject(
                 section.getQuestions().stream().map(question -> {
+                    System.out.println(question);
                     if (question instanceof QCM)
                         return mapper.convertValue((QCM) question, new TypeReference<Map<String, Object>>() {});
                     else
