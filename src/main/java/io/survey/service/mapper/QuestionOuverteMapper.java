@@ -17,6 +17,8 @@ public interface QuestionOuverteMapper extends EntityMapper<QuestionOuverteDTO, 
     @Mapping(target = "section", source = "section", qualifiedByName = "sectionId")
     QuestionDTO toDto(Question s);
 
+    QuestionOuverteDTO toDto(QuestionOuverte questionOuverte);
+
     @Named("questionId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")

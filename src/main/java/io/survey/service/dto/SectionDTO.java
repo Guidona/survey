@@ -3,9 +3,7 @@ package io.survey.service.dto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 /**
  * A DTO for the {@link io.survey.model.Section} entity.
@@ -19,7 +17,7 @@ public class SectionDTO implements Serializable {
 
     private Integer ordre;
 
-    private Set<QuestionDTO> questions = new HashSet<>();
+    private List<Map<String, Object>> questionsObject = new ArrayList<>();
 
     private SectionDTO section;
 
@@ -47,21 +45,20 @@ public class SectionDTO implements Serializable {
         this.ordre = ordre;
     }
 
-
-    public Set<QuestionDTO> getQuestions() {
-        return questions;
-    }
-
-    public void setQuestions(Set<QuestionDTO> questions) {
-        this.questions = questions;
-    }
-
     public SectionDTO getSection() {
         return section;
     }
 
     public void setSection(SectionDTO section) {
         this.section = section;
+    }
+
+    public List<Map<String, Object>> getQuestionsObject() {
+        return questionsObject;
+    }
+
+    public void setQuestionsObject(List<Map<String, Object>> questionsObject) {
+        this.questionsObject = questionsObject;
     }
 
     @Override

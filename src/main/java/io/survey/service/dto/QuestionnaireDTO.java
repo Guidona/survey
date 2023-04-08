@@ -1,7 +1,5 @@
 package io.survey.service.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.Set;

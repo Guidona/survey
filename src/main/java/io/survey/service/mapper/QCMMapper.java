@@ -15,8 +15,12 @@ import org.mapstruct.*;
 public interface QCMMapper extends EntityMapper<QCMDTO, QCM> {
 
 //    @Mapping(target = "question", source = "question", qualifiedByName = "questionId")
-    @Mapping(target = "section", ignore = true)
+    //@Mapping(target = "section.questions", ignore = true)
     QuestionDTO toDto(Question s);
+
+    //@Mapping(target = "section.questions", ignore = true)
+    QCMDTO toDto(QCM qcm);
+
     @Named("questionId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
