@@ -74,7 +74,6 @@ public class QCMDTO extends QuestionDTO implements Serializable {
                 ", ordre=" + getOrdre() +
                 ", code='" + getCode() + "'" +
                 ", obligatoire='" + getObligatoire() + "'" +
-                ", question=" + getQuestion() +
                 "}";
     }
 }
