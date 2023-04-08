@@ -3,6 +3,8 @@ package io.survey.service.dto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -21,7 +23,7 @@ public class QuestionDTO implements Serializable {
 
     private Boolean obligatoire;
 
-    private QuestionDTO question;
+    private List<QuestionDTO> questions = new ArrayList<>();
 
     @JsonIgnore
     private SectionDTO section;
@@ -66,12 +68,12 @@ public class QuestionDTO implements Serializable {
         this.obligatoire = obligatoire;
     }
 
-    public QuestionDTO getQuestion() {
-        return question;
+    public List<QuestionDTO> getQuestions() {
+        return questions;
     }
 
-    public void setQuestion(QuestionDTO question) {
-        this.question = question;
+    public void setQuestions(List<QuestionDTO> questions) {
+        this.questions = questions;
     }
 
     public SectionDTO getSection() {
@@ -112,7 +114,6 @@ public class QuestionDTO implements Serializable {
             ", ordre=" + getOrdre() +
             ", code='" + getCode() + "'" +
             ", obligatoire='" + getObligatoire() + "'" +
-            ", question=" + getQuestion() +
             "}";
     }
 }

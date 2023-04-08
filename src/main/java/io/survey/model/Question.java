@@ -6,7 +6,9 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -38,6 +40,9 @@ public class Question implements Serializable{
 
     @ManyToOne
     private Question question;
+
+    @OneToMany(mappedBy = "question")
+    private List<Question> questions = new ArrayList<>();
 
     @ManyToOne
     @JsonBackReference
