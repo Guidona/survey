@@ -1,10 +1,8 @@
 package io.survey.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -14,6 +12,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "option_qcm")
+@EqualsAndHashCode(exclude = "qcm")
 public class OptionQCM implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -27,7 +26,7 @@ public class OptionQCM implements Serializable {
     private String libelle;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "optionsQCM" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "optionsQCM", "section", "question" })
     private QCM qcm;
 
 }

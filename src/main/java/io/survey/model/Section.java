@@ -1,9 +1,9 @@
 package io.survey.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -16,6 +16,7 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(exclude = {"questionnaire"})
 public class Section implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -32,15 +33,24 @@ public class Section implements Serializable {
     private Integer ordre;
 
     @OneToMany(mappedBy = "section")
-    @JsonIgnoreProperties(value = { "question", "section" })
+    @JsonManagedReference
     private Set<Question> questions = new HashSet<>();
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JsonIgnoreProperties(value = { "sections" })
-//    private Questionnaire questionnaire;
+    @ManyToOne
+    @JsonBackReference
+    private Questionnaire questionnaire;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "questions", "section" })
+    @JsonBackReference
     private Section section;
 
+    @Override
+    public String toString() {
+        return "Section{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", ordre=" + ordre +
+                ", questions=" + questions +
+                '}';
+    }
 }

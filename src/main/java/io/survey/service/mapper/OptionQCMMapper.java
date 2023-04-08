@@ -9,9 +9,10 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity {@link OptionQCM} and its DTO {@link OptionQCMDTO}.
  */
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {QCMMapper.class})
 public interface OptionQCMMapper extends EntityMapper<OptionQCMDTO, OptionQCM> {
-    @Mapping(target = "qcm", source = "qcm", qualifiedByName = "qCMId")
+    //@Mapping(target = "qcm", source = "qcm", qualifiedByName = "qCMId")
+    @Mapping(target = "qcm.section", ignore = true)
     OptionQCMDTO toDto(OptionQCM s);
 
     @Named("qCMId")

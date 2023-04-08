@@ -1,5 +1,7 @@
 package io.survey.service.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -11,6 +13,7 @@ public class QCMDTO extends QuestionDTO implements Serializable {
 
     private Long id;
 
+    @JsonIgnoreProperties(value = {"questionnaire", "questions", "section"})
     private SectionDTO section;
 
     public Long getId() {

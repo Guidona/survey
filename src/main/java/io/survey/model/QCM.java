@@ -1,6 +1,7 @@
 package io.survey.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,11 +23,12 @@ import java.util.Set;
 public class QCM extends Question {
 
     @OneToMany(mappedBy = "qcm")
-    @JsonIgnoreProperties(value = { "qcm" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "qcm" })
     private Set<OptionQCM> optionsQCM = new HashSet<>();
 
     @Override
     public String toString() {
         return super.toString();
     }
+
 }

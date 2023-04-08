@@ -7,5 +7,9 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity {@link Questionnaire} and its DTO {@link QuestionnaireDTO}.
  */
-@Mapper(componentModel = "spring")
-public interface QuestionnaireMapper extends EntityMapper<QuestionnaireDTO, Questionnaire> {}
+@Mapper(componentModel = "spring", uses = {SectionMapper.class})
+public interface QuestionnaireMapper extends EntityMapper<QuestionnaireDTO, Questionnaire> {
+
+    @Mapping(target = "sections.questionnaire", ignore = true)
+    QuestionnaireDTO toDto(Questionnaire questionnaire);
+}

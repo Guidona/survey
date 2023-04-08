@@ -1,5 +1,6 @@
 package io.survey.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -39,11 +40,21 @@ public class Question implements Serializable{
     private Boolean obligatoire;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "question", "section" })
+    @JsonBackReference
     private Question question;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "questions" })
+    @JsonBackReference
     private Section section;
 
+    @Override
+    public String toString() {
+        return "Question{" +
+                "id=" + id +
+                ", libelle='" + libelle + '\'' +
+                ", ordre=" + ordre +
+                ", code='" + code + '\'' +
+                ", obligatoire=" + obligatoire +
+                '}';
+    }
 }
