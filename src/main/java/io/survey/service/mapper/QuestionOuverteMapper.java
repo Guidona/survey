@@ -13,7 +13,6 @@ import org.mapstruct.*;
  */
 @Mapper(componentModel = "spring")
 public interface QuestionOuverteMapper extends EntityMapper<QuestionOuverteDTO, QuestionOuverte> {
-    @Mapping(target = "question", source = "question", qualifiedByName = "questionId")
     @Mapping(target = "section", source = "section", qualifiedByName = "sectionId")
     QuestionDTO toDto(Question s);
 
