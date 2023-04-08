@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A DTO for the {@link io.survey.model.QCM} entity.
@@ -16,12 +17,22 @@ public class QCMDTO extends QuestionDTO implements Serializable {
     @JsonIgnoreProperties(value = {"questionnaire", "questions", "section"})
     private SectionDTO section;
 
+    private Set<OptionQCMDTO> optionsQCM;
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Set<OptionQCMDTO> getOptionsQCM() {
+        return optionsQCM;
+    }
+
+    public void setOptionsQCM(Set<OptionQCMDTO> optionsQCM) {
+        this.optionsQCM = optionsQCM;
     }
 
     @Override
