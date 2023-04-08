@@ -2,6 +2,7 @@ package io.survey.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -38,11 +39,13 @@ public class Question implements Serializable{
     @Column(name = "obligatoire")
     private Boolean obligatoire;
 
-    @ManyToOne
-    private Question question;
-
     @OneToMany(mappedBy = "question")
+    @JsonManagedReference
     private List<Question> questions = new ArrayList<>();
+
+    @ManyToOne
+    @JsonBackReference
+    private Question question;
 
     @ManyToOne
     @JsonBackReference
