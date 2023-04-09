@@ -1,9 +1,9 @@
 package io.survey.service.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 /**
  * A DTO for the {@link io.survey.model.Formulaire} entity.
@@ -15,7 +15,12 @@ public class FormulaireDTO implements Serializable {
 
     private String libelle;
 
+    private Integer numero;
+
+    @JsonIgnore
     private Set<SectionDTO> sections = new HashSet<>();
+
+    private List<LigneFormulaireDTO> ligneFormulaires = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -39,6 +44,22 @@ public class FormulaireDTO implements Serializable {
 
     public void setSections(Set<SectionDTO> sections) {
         this.sections = sections;
+    }
+
+    public Integer getNumero() {
+        return numero;
+    }
+
+    public void setNumero(Integer numero) {
+        this.numero = numero;
+    }
+
+    public List<LigneFormulaireDTO> getLigneFormulaires() {
+        return ligneFormulaires;
+    }
+
+    public void setLigneFormulaires(List<LigneFormulaireDTO> ligneFormulaires) {
+        this.ligneFormulaires = ligneFormulaires;
     }
 
     @Override

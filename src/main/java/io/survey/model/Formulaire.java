@@ -8,7 +8,9 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -32,7 +34,7 @@ public class Formulaire implements Serializable {
 
     @OneToMany(mappedBy = "formulaire")
     @JsonIgnoreProperties(value = { "formulaire", "question", "reponse", "formulaire" }, allowSetters = true)
-    private Set<LigneFormulaire> ligneFormulaires = new HashSet<>();
+    private List<LigneFormulaire> ligneFormulaires = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(
