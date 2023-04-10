@@ -15,9 +15,9 @@ import org.mapstruct.*;
  */
 @Mapper(componentModel = "spring")
 public interface LigneFormulaireMapper extends EntityMapper<LigneFormulaireDTO, LigneFormulaire> {
-    @Mapping(target = "formulaire", source = "formulaire", qualifiedByName = "formulaireId")
-    @Mapping(target = "question", source = "question", qualifiedByName = "questionId")
-    @Mapping(target = "reponse", source = "reponse", qualifiedByName = "reponseId")
+//    @Mapping(target = "formulaire", source = "formulaire", qualifiedByName = "formulaireId")
+//    @Mapping(target = "question", source = "question", qualifiedByName = "questionId")
+//    @Mapping(target = "reponse", source = "reponse", qualifiedByName = "reponseId")
     LigneFormulaireDTO toDto(LigneFormulaire s);
 
     @Named("formulaireId")
