@@ -33,4 +33,7 @@ public class LigneFormulaire implements Serializable {
     @ManyToOne
     private Reponse reponse;
 
+    @Column(name = "contenu")
+    private String contenu;
+
 }

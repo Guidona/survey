@@ -20,6 +20,8 @@ public class LigneFormulaireDTO implements Serializable {
 
     private ReponseDTO reponse;
 
+    private String contenu;
+
     public Long getId() {
         return id;
     }
@@ -50,6 +52,14 @@ public class LigneFormulaireDTO implements Serializable {
 
     public void setReponse(ReponseDTO reponse) {
         this.reponse = reponse;
+    }
+
+    public String getContenu() {
+        return contenu;
+    }
+
+    public void setContenu(String contenu) {
+        this.contenu = contenu;
     }
 
     @Override
