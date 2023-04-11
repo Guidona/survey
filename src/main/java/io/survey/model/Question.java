@@ -57,7 +57,7 @@ public class Question implements Serializable{
     private Question dependsOn;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "question_type")
+    @Column(name = "value_type")
     private QuestionType questionType;
 
     @Override
