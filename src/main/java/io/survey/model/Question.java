@@ -55,7 +55,7 @@ public class Question implements Serializable{
 
     @ManyToOne
     @JsonBackReference
-    private LigneFormulaire dependsOn;
+    private OptionQCM dependsOn;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "value_type")
