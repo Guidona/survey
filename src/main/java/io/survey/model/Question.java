@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import io.survey.model.enumeration.QuestionType;
+import io.survey.service.dto.LigneFormulaireDTO;
 import lombok.*;
 
 import javax.persistence.*;
@@ -54,7 +55,7 @@ public class Question implements Serializable{
 
     @ManyToOne
     @JsonBackReference
-    private Question dependsOn;
+    private LigneFormulaire dependsOn;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "value_type")

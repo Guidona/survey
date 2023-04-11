@@ -1,6 +1,7 @@
 package io.survey.service.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.survey.model.LigneFormulaire;
 import io.survey.model.Question;
 import io.survey.model.enumeration.QuestionType;
 
@@ -30,7 +31,7 @@ public class QuestionDTO implements Serializable {
     @JsonIgnore
     private SectionDTO section;
 
-    private Question dependsOn;
+    private LigneFormulaire dependsOn;
 
     private QuestionType questionType;
 
@@ -90,12 +91,20 @@ public class QuestionDTO implements Serializable {
         this.section = section;
     }
 
-    public Question getDependsOn() {
+    public LigneFormulaire getDependsOn() {
         return dependsOn;
     }
 
-    public void setDependsOn(Question dependsOn) {
+    public void setDependsOn(LigneFormulaire dependsOn) {
         this.dependsOn = dependsOn;
+    }
+
+    public QuestionType getQuestionType() {
+        return questionType;
+    }
+
+    public void setQuestionType(QuestionType questionType) {
+        this.questionType = questionType;
     }
 
     @Override
