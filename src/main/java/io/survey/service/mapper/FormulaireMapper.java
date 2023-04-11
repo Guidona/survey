@@ -16,4 +16,13 @@ public interface FormulaireMapper extends EntityMapper<FormulaireDTO, Formulaire
 //    @Mapping(target = "sections", source = "sectionsDTO")
 //    Formulaire toEntity(FormulaireDTO s);
 
+    default Formulaire fromId(Long id) {
+        if (id == null) {
+            return null;
+        }
+        Formulaire formulaire = new Formulaire();
+        formulaire.setId(id);
+        return formulaire;
+    }
+
 }
