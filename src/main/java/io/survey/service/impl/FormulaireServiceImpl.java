@@ -3,6 +3,7 @@ package io.survey.service.impl;
 import io.survey.model.Formulaire;
 import io.survey.repository.FormulaireRepository;
 import io.survey.service.FormulaireService;
+import io.survey.service.LigneFormulaireService;
 import io.survey.service.dto.FormulaireDTO;
 import io.survey.service.mapper.FormulaireMapper;
 
@@ -28,9 +29,12 @@ public class FormulaireServiceImpl implements FormulaireService {
 
     private final FormulaireMapper formulaireMapper;
 
-    public FormulaireServiceImpl(FormulaireRepository formulaireRepository, FormulaireMapper formulaireMapper) {
+    private final LigneFormulaireService ligneFormulaireService;
+
+    public FormulaireServiceImpl(FormulaireRepository formulaireRepository, FormulaireMapper formulaireMapper, LigneFormulaireService ligneFormulaireService) {
         this.formulaireRepository = formulaireRepository;
         this.formulaireMapper = formulaireMapper;
+        this.ligneFormulaireService = ligneFormulaireService;
     }
 
     @Override
@@ -46,6 +50,11 @@ public class FormulaireServiceImpl implements FormulaireService {
         log.debug("Request to update Formulaire : {}", formulaireDTO);
         Formulaire formulaire = formulaireMapper.toEntity(formulaireDTO);
         formulaire = formulaireRepository.save(formulaire);
+        final Long formulaireId = formulaire.getId();
+        formulaireDTO.getLigneFormulaires().forEach(ligneFormulaire -> {
+            ligneFormulaire.setFormulaireId(formulaireId);
+            ligneFormulaireService.partialUpdate(ligneFormulaire);
+        });
         return formulaireMapper.toDto(formulaire);
     }
 

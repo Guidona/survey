@@ -16,6 +16,8 @@ public class LigneFormulaireDTO implements Serializable {
     @JsonIgnore
     private FormulaireDTO formulaire;
 
+    private Long formulaireId;
+
     private QuestionDTO question;
 
     private ReponseDTO reponse;
@@ -60,6 +62,14 @@ public class LigneFormulaireDTO implements Serializable {
 
     public void setContenu(String contenu) {
         this.contenu = contenu;
+    }
+
+    public Long getFormulaireId() {
+        return formulaireId;
+    }
+
+    public void setFormulaireId(Long formulaireId) {
+        this.formulaireId = formulaireId;
     }
 
     @Override

@@ -1,6 +1,8 @@
 package io.survey.service.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.survey.model.Question;
+import io.survey.model.enumeration.QuestionType;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -27,6 +29,10 @@ public class QuestionDTO implements Serializable {
 
     @JsonIgnore
     private SectionDTO section;
+
+    private Question dependsOn;
+
+    private QuestionType questionType;
 
     public Long getId() {
         return id;
@@ -82,6 +88,14 @@ public class QuestionDTO implements Serializable {
 
     public void setSection(SectionDTO section) {
         this.section = section;
+    }
+
+    public Question getDependsOn() {
+        return dependsOn;
+    }
+
+    public void setDependsOn(Question dependsOn) {
+        this.dependsOn = dependsOn;
     }
 
     @Override

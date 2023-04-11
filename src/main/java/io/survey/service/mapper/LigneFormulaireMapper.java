@@ -13,12 +13,15 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity {@link LigneFormulaire} and its DTO {@link LigneFormulaireDTO}.
  */
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {FormulaireMapper.class})
 public interface LigneFormulaireMapper extends EntityMapper<LigneFormulaireDTO, LigneFormulaire> {
-//    @Mapping(target = "formulaire", source = "formulaire", qualifiedByName = "formulaireId")
+    @Mapping(target = "formulaireId", source = "formulaire.id")
 //    @Mapping(target = "question", source = "question", qualifiedByName = "questionId")
 //    @Mapping(target = "reponse", source = "reponse", qualifiedByName = "reponseId")
     LigneFormulaireDTO toDto(LigneFormulaire s);
+
+    @Mapping(target = "formulaire", source = "formulaireId")
+    LigneFormulaire toEntity(LigneFormulaireDTO s);
 
     @Named("formulaireId")
     @BeanMapping(ignoreByDefault = true)

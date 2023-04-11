@@ -3,6 +3,7 @@ package io.survey.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import io.survey.model.enumeration.QuestionType;
 import lombok.*;
 
 import javax.persistence.*;
@@ -50,6 +51,14 @@ public class Question implements Serializable{
     @ManyToOne
     @JsonBackReference
     private Section section;
+
+    @ManyToOne
+    @JsonBackReference
+    private Question dependsOn;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "question_type")
+    private QuestionType questionType;
 
     @Override
     public String toString() {
