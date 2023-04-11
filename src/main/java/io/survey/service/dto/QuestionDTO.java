@@ -31,7 +31,7 @@ public class QuestionDTO implements Serializable {
     @JsonIgnore
     private SectionDTO section;
 
-    private LigneFormulaire dependsOn;
+    private LigneFormulaireDTO dependsOn;
 
     private QuestionType questionType;
 
@@ -91,11 +91,11 @@ public class QuestionDTO implements Serializable {
         this.section = section;
     }
 
-    public LigneFormulaire getDependsOn() {
+    public LigneFormulaireDTO getDependsOn() {
         return dependsOn;
     }
 
-    public void setDependsOn(LigneFormulaire dependsOn) {
+    public void setDependsOn(LigneFormulaireDTO dependsOn) {
         this.dependsOn = dependsOn;
     }
 
