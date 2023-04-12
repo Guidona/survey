@@ -13,7 +13,7 @@ public class OptionQCMDTO implements Serializable {
 
     private String libelle;
 
-    private Boolean isDefault;
+    private Boolean defaultOption;
 
     public Long getId() {
         return id;
@@ -31,12 +31,12 @@ public class OptionQCMDTO implements Serializable {
         this.libelle = libelle;
     }
 
-    public Boolean getDefault() {
-        return isDefault;
+    public Boolean getDefaultOption() {
+        return defaultOption;
     }
 
-    public void setDefault(Boolean aDefault) {
-        isDefault = aDefault;
+    public void setDefaultOption(Boolean defaultOption) {
+        this.defaultOption = defaultOption;
     }
 
     @Override

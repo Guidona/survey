@@ -13,7 +13,11 @@ import org.mapstruct.*;
 public interface OptionQCMMapper extends EntityMapper<OptionQCMDTO, OptionQCM> {
     //@Mapping(target = "qcm", source = "qcm", qualifiedByName = "qCMId")
     @Mapping(target = "qcm.section", ignore = true)
+    @Mapping(source = "isDefault", target = "defaultOption")
     OptionQCMDTO toDto(OptionQCM s);
+
+    @Mapping(source = "defaultOption", target = "isDefault")
+    OptionQCM toEntity(OptionQCMDTO s);
 
     @Named("qCMId")
     @BeanMapping(ignoreByDefault = true)

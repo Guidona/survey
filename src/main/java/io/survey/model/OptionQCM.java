@@ -3,6 +3,7 @@ package io.survey.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -30,6 +31,7 @@ public class OptionQCM implements Serializable {
     private QCM qcm;
 
     @Column(name = "is_default")
+    @Type(type = "true_false")
     private Boolean isDefault = false;
 
 }
