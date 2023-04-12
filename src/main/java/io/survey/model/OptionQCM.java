@@ -31,7 +31,6 @@ public class OptionQCM implements Serializable {
     private QCM qcm;
 
     @Column(name = "is_default")
-    @Type(type = "true_false")
     private Boolean isDefault = false;
 
 }
