@@ -29,4 +29,7 @@ public class OptionQCM implements Serializable {
     @JsonIgnoreProperties(value = { "optionsQCM", "section", "question" })
     private QCM qcm;
 
+    @Column(name = "is_default")
+    private Boolean isDefault = false;
+
 }

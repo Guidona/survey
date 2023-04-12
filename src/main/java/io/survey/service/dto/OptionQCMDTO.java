@@ -13,6 +13,8 @@ public class OptionQCMDTO implements Serializable {
 
     private String libelle;
 
+    private Boolean isDefault;
+
     public Long getId() {
         return id;
     }
@@ -27,6 +29,14 @@ public class OptionQCMDTO implements Serializable {
 
     public void setLibelle(String libelle) {
         this.libelle = libelle;
+    }
+
+    public Boolean getDefault() {
+        return isDefault;
+    }
+
+    public void setDefault(Boolean aDefault) {
+        isDefault = aDefault;
     }
 
     @Override
