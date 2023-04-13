@@ -46,7 +46,7 @@ public class FormulaireServiceImpl implements FormulaireService {
         final Long formulaireId = formulaire.getId();
         formulaireDTO.getLigneFormulaires().forEach(ligneFormulaire -> {
             ligneFormulaire.setFormulaireId(formulaireId);
-            ligneFormulaireService.partialUpdate(ligneFormulaire);
+            ligneFormulaireService.update(ligneFormulaire);
         });
         return formulaireMapper.toDto(formulaire);
     }
@@ -60,7 +60,7 @@ public class FormulaireServiceImpl implements FormulaireService {
         final Long formulaireId = formulaire.getId();
         formulaireDTO.getLigneFormulaires().forEach(ligneFormulaire -> {
             ligneFormulaire.setFormulaireId(formulaireId);
-            ligneFormulaireService.partialUpdate(ligneFormulaire);
+            ligneFormulaireService.update(ligneFormulaire);
         });
         return formulaireMapper.toDto(formulaire);
     }
