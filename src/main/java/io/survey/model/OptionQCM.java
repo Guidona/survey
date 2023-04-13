@@ -33,4 +33,7 @@ public class OptionQCM implements Serializable {
     @Column(name = "is_default")
     private Boolean isDefault = false;
 
+    @Column(name = "order")
+    private Integer order;
+
 }
