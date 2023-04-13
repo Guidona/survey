@@ -15,7 +15,7 @@ public class OptionQCMDTO implements Serializable {
 
     private Boolean defaultOption;
 
-    private Integer order;
+    private Integer ordre;
 
     public Long getId() {
         return id;
@@ -41,12 +41,12 @@ public class OptionQCMDTO implements Serializable {
         this.defaultOption = defaultOption;
     }
 
-    public Integer getOrder() {
-        return order;
+    public Integer getOrdre() {
+        return ordre;
     }
 
-    public void setOrder(Integer order) {
-        this.order = order;
+    public void setOrdre(Integer ordre) {
+        this.ordre = ordre;
     }
 
     @Override

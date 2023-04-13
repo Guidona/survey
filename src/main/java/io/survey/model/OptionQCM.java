@@ -1,9 +1,7 @@
 package io.survey.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
-import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -34,6 +32,6 @@ public class OptionQCM implements Serializable {
     private Boolean isDefault = false;
 
     @Column(name = "order")
-    private Integer order;
+    private Integer ordre;
 
 }
