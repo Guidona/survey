@@ -7,6 +7,7 @@ import io.survey.service.LigneFormulaireService;
 import io.survey.service.dto.FormulaireDTO;
 import io.survey.service.mapper.FormulaireMapper;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
@@ -42,6 +43,11 @@ public class FormulaireServiceImpl implements FormulaireService {
         log.debug("Request to save Formulaire : {}", formulaireDTO);
         Formulaire formulaire = formulaireMapper.toEntity(formulaireDTO);
         formulaire = formulaireRepository.save(formulaire);
+        final Long formulaireId = formulaire.getId();
+        formulaireDTO.getLigneFormulaires().forEach(ligneFormulaire -> {
+            ligneFormulaire.setFormulaireId(formulaireId);
+            ligneFormulaireService.partialUpdate(ligneFormulaire);
+        });
         return formulaireMapper.toDto(formulaire);
     }
 
@@ -49,6 +55,7 @@ public class FormulaireServiceImpl implements FormulaireService {
     public FormulaireDTO update(FormulaireDTO formulaireDTO) {
         log.debug("Request to update Formulaire : {}", formulaireDTO);
         Formulaire formulaire = formulaireMapper.toEntity(formulaireDTO);
+        formulaire.setLigneFormulaires(new ArrayList<>());
         formulaire = formulaireRepository.save(formulaire);
         final Long formulaireId = formulaire.getId();
         formulaireDTO.getLigneFormulaires().forEach(ligneFormulaire -> {
