@@ -49,6 +49,10 @@ public class Section implements Serializable {
     @OneToMany(mappedBy = "section")
     private List<Section> sections = new ArrayList<>();
 
+    @ManyToOne
+    @JsonBackReference
+    private OptionQCM dependsOn;
+
     @Override
     public String toString() {
         return "Section{" +

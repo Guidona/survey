@@ -21,6 +21,8 @@ public class SectionDTO implements Serializable {
 
     private List<SectionDTO> sections;
 
+    private OptionQCMDTO dependsOn;
+
     public Long getId() {
         return id;
     }
@@ -59,6 +61,14 @@ public class SectionDTO implements Serializable {
 
     public void setQuestionsObject(List<Map<String, Object>> questionsObject) {
         this.questionsObject = questionsObject;
+    }
+
+    public OptionQCMDTO getDependsOn() {
+        return dependsOn;
+    }
+
+    public void setDependsOn(OptionQCMDTO dependsOn) {
+        this.dependsOn = dependsOn;
     }
 
     @Override

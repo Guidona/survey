@@ -1,5 +1,6 @@
 package io.survey.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,6 +18,9 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "formulaire", uniqueConstraints =
+    @UniqueConstraint(name = "libelle_numero", columnNames = {"libelle", "numero"})
+)
 public class Formulaire implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -43,5 +47,9 @@ public class Formulaire implements Serializable {
             inverseJoinColumns = { @JoinColumn(name = "section_id", referencedColumnName = "id") }
     )
     private Set<Section> sections = new HashSet<>();
+
+    @ManyToOne
+    @JsonBackReference
+    private Questionnaire questionnaire;
 
 }

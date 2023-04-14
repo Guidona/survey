@@ -22,6 +22,8 @@ public class FormulaireDTO implements Serializable {
 
     private List<LigneFormulaireDTO> ligneFormulaires = new ArrayList<>();
 
+    private Long questionnaireId;
+
     public Long getId() {
         return id;
     }
@@ -60,6 +62,14 @@ public class FormulaireDTO implements Serializable {
 
     public void setLigneFormulaires(List<LigneFormulaireDTO> ligneFormulaires) {
         this.ligneFormulaires = ligneFormulaires;
+    }
+
+    public Long getQuestionnaireId() {
+        return questionnaireId;
+    }
+
+    public void setQuestionnaireId(Long questionnaireId) {
+        this.questionnaireId = questionnaireId;
     }
 
     @Override

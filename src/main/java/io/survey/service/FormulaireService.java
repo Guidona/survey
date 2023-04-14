@@ -46,6 +46,8 @@ public interface FormulaireService {
 
     List<FormulaireDTO> findAll();
 
+    List<FormulaireDTO> findByQuestionnaire(Long questionnaireId);
+
     /**
      * Get the "id" formulaire.
      *

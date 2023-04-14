@@ -105,4 +105,9 @@ public class FormulaireServiceImpl implements FormulaireService {
         log.debug("Request to delete Formulaire : {}", id);
         formulaireRepository.deleteById(id);
     }
+
+    @Override
+    public List<FormulaireDTO> findByQuestionnaire(Long questionnaireId) {
+        return formulaireMapper.toDto(formulaireRepository.findByQuestionnaire_Id(questionnaireId));
+    }
 }
