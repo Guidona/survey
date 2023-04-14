@@ -149,7 +149,8 @@ public class FormulaireResource {
     public ResponseEntity<List<FormulaireDTO>> getAllFormulaires(@Param("questionnaireId") Long questionnaireId,
                                                                  Pageable pageable) {
         log.debug("REST request to get a page of Formulaires");
-        Page<FormulaireDTO> page = formulaireService.findAll(pageable);
+        Page<FormulaireDTO> page = questionnaireId == null ? formulaireService.findAll(pageable) :
+                formulaireService.findByQuestionnaire(questionnaireId, pageable);
         return ResponseEntity.ok().body(page.getContent());
     }
 

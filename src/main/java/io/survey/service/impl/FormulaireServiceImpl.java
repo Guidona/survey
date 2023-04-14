@@ -107,7 +107,8 @@ public class FormulaireServiceImpl implements FormulaireService {
     }
 
     @Override
-    public List<FormulaireDTO> findByQuestionnaire(Long questionnaireId) {
-        return formulaireMapper.toDto(formulaireRepository.findByQuestionnaire_Id(questionnaireId));
+    @Transactional(readOnly = true)
+    public Page<FormulaireDTO> findByQuestionnaire(Long questionnaireId, Pageable pageable) {
+        return formulaireRepository.findByQuestionnaire_Id(questionnaireId, pageable).map(formulaireMapper::toDto);
     }
 }
