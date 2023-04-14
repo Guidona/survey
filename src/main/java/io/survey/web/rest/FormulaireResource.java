@@ -146,7 +146,7 @@ public class FormulaireResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of formulaires in body.
      */
     @GetMapping("/formulaires")
-    public ResponseEntity<List<FormulaireDTO>> getAllFormulaires(@Param("questionnaireId") Long questionnaireId,
+    public ResponseEntity<List<FormulaireDTO>> getAllFormulaires(@RequestParam(value = "questionnaireId", required = false) Long questionnaireId,
                                                                  Pageable pageable) {
         log.debug("REST request to get a page of Formulaires");
         Page<FormulaireDTO> page = questionnaireId == null ? formulaireService.findAll(pageable) :
