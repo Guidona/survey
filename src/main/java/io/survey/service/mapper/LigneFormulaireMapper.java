@@ -20,7 +20,7 @@ public interface LigneFormulaireMapper extends EntityMapper<LigneFormulaireDTO, 
 //    @Mapping(target = "reponse", source = "reponse", qualifiedByName = "reponseId")
     LigneFormulaireDTO toDto(LigneFormulaire s);
 
-    @Mapping(target = "formulaire", source = "formulaireId")
+    @Mapping(target = "formulaire.id", source = "formulaireId")
     LigneFormulaire toEntity(LigneFormulaireDTO s);
 
     @Named("formulaireId")
