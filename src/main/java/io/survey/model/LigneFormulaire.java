@@ -1,6 +1,5 @@
 package io.survey.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,8 +23,7 @@ public class LigneFormulaire implements Serializable {
     private Long id;
 
     @ManyToOne
-    //@JsonIgnoreProperties(value = { "ligneFormulaires" }, allowSetters = true)
-    @JsonBackReference
+    @JsonIgnoreProperties(value = { "ligneFormulaires" }, allowSetters = true)
     private Formulaire formulaire;
 
     @ManyToOne

@@ -2,7 +2,6 @@ package io.survey.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -38,8 +37,7 @@ public class Formulaire implements Serializable {
     private Integer numero;
 
     @OneToMany(mappedBy = "formulaire")
-    @JsonIgnoreProperties(value = { "formulaire", "question", "reponse" }, allowSetters = true)
-    @JsonManagedReference
+    @JsonIgnoreProperties(value = { "formulaire", "question", "reponse", "formulaire" }, allowSetters = true)
     private List<LigneFormulaire> ligneFormulaires = new ArrayList<>();
 
     @ManyToMany
