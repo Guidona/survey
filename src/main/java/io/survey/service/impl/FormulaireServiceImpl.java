@@ -103,6 +103,11 @@ public class FormulaireServiceImpl implements FormulaireService {
     @Override
     public void delete(Long id) {
         log.debug("Request to delete Formulaire : {}", id);
+        // update all lines connected to this form
+        ligneFormulaireService.findByFormulaire(id).forEach(ligne -> {
+            ligne.setFormulaireId(null);
+            ligneFormulaireService.save(ligne);
+        });
         formulaireRepository.deleteById(id);
     }
 

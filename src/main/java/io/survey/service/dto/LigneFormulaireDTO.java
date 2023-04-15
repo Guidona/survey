@@ -1,7 +1,5 @@
 package io.survey.service.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -16,8 +14,6 @@ public class LigneFormulaireDTO implements Serializable {
     private Long formulaireId;
 
     private QuestionDTO question;
-
-    private ReponseDTO reponse;
 
     private String contenu;
 
@@ -35,14 +31,6 @@ public class LigneFormulaireDTO implements Serializable {
 
     public void setQuestion(QuestionDTO question) {
         this.question = question;
-    }
-
-    public ReponseDTO getReponse() {
-        return reponse;
-    }
-
-    public void setReponse(ReponseDTO reponse) {
-        this.reponse = reponse;
     }
 
     public String getContenu() {
@@ -88,7 +76,6 @@ public class LigneFormulaireDTO implements Serializable {
         return "LigneFormulaireDTO{" +
             "id=" + getId() +
             ", question=" + getQuestion() +
-            ", reponse=" + getReponse() +
             "}";
     }
 }

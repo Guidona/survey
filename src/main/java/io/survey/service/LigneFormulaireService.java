@@ -1,6 +1,8 @@
 package io.survey.service;
 
 import io.survey.service.dto.LigneFormulaireDTO;
+
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -55,4 +57,6 @@ public interface LigneFormulaireService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    List<LigneFormulaireDTO> findByFormulaire(Long formulaireId);
 }

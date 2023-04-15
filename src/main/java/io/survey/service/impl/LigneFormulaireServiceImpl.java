@@ -5,6 +5,8 @@ import io.survey.repository.LigneFormulaireRepository;
 import io.survey.service.LigneFormulaireService;
 import io.survey.service.dto.LigneFormulaireDTO;
 import io.survey.service.mapper.LigneFormulaireMapper;
+
+import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -80,5 +82,10 @@ public class LigneFormulaireServiceImpl implements LigneFormulaireService {
     public void delete(Long id) {
         log.debug("Request to delete LigneFormulaire : {}", id);
         ligneFormulaireRepository.deleteById(id);
+    }
+
+    @Override
+    public List<LigneFormulaireDTO> findByFormulaire(Long formulaireId) {
+        return ligneFormulaireMapper.toDto(ligneFormulaireRepository.findByFormulaire_Id(formulaireId));
     }
 }
