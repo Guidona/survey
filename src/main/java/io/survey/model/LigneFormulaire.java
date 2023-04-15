@@ -36,4 +36,14 @@ public class LigneFormulaire implements Serializable {
     @Column(name = "contenu")
     private String contenu;
 
+    @Override
+    public String toString() {
+        return "LigneFormulaire{" +
+                "id=" + id +
+                ", formulaire=" + formulaire +
+                ", question=" + question +
+                ", reponse=" + reponse +
+                ", contenu='" + contenu + '\'' +
+                '}';
+    }
 }

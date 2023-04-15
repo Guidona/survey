@@ -52,4 +52,12 @@ public class Formulaire implements Serializable {
     @JsonBackReference
     private Questionnaire questionnaire;
 
+    @Override
+    public String toString() {
+        return "Formulaire{" +
+                "id=" + id +
+                ", libelle='" + libelle + '\'' +
+                ", numero=" + numero +
+                '}';
+    }
 }

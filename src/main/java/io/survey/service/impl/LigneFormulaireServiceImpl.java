@@ -45,6 +45,7 @@ public class LigneFormulaireServiceImpl implements LigneFormulaireService {
     public LigneFormulaireDTO update(LigneFormulaireDTO ligneFormulaireDTO) {
         log.debug("Request to update LigneFormulaire : {}", ligneFormulaireDTO);
         LigneFormulaire ligneFormulaire = ligneFormulaireMapper.toEntity(ligneFormulaireDTO);
+        log.info("{}", ligneFormulaire);
         ligneFormulaire = ligneFormulaireRepository.save(ligneFormulaire);
         return ligneFormulaireMapper.toDto(ligneFormulaire);
     }
