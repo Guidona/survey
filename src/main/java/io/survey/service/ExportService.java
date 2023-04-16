@@ -51,7 +51,7 @@ public class ExportService {
     }
 
     public List<QuestionnaireFormulaireDTO> getResponses() {
-        return formulaireRepository.findAll()
+        return formulaireRepository.findAllOrderByNumeroAsc()
                 .stream().map(this::getResponses)
                 .collect(Collectors.toList());
     }
