@@ -15,4 +15,6 @@ public interface LigneFormulaireRepository extends JpaRepository<LigneFormulaire
 
     List<LigneFormulaire> findByFormulaire_Id(Long formulaireId);
 
+    List<LigneFormulaire> findByFormulaire_IdAndQuestion_Section_Id(Long formulaireId, Long sectionId);
+
 }

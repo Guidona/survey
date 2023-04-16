@@ -43,4 +43,10 @@ public class ExportResource {
                 .contentType(MediaType.APPLICATION_OCTET_STREAM).body(file);
     }
 
+    @GetMapping("/data/formulaires")
+    public ResponseEntity<?> exportData() throws IOException {
+        return ResponseEntity.ok(exportService.getResponses());
+    }
+
+
 }
