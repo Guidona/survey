@@ -84,12 +84,15 @@ public class ExportService {
         return new HashSet<>(questionnaireLigneFormulaireMapper.toDto(lignesFormulaire));
     }
 
-    public ByteArrayInputStream generateFile(List<FormulaireDTO> responses, File filelocator) throws IOException {
+    public ByteArrayInputStream generateFile(List<QuestionnaireFormulaireDTO> responses, File filelocator) throws IOException {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         //File file = ResourceUtils.getFile("classpath:static/templates/listing.xlsx");
         try (InputStream is = new FileInputStream(filelocator)) {
             Context context = new Context();
             context.putVar("formulaires", responses);
+            context.putVar("sheetNames", responses.stream()
+                    .map(QuestionnaireFormulaireDTO::getNumero)
+                    .collect(Collectors.toList()));
             JxlsHelper.getInstance().processTemplate(is, outputStream, context);
         }
         return new ByteArrayInputStream(outputStream.toByteArray());

@@ -3,6 +3,7 @@ package io.survey.web.rest;
 import io.survey.service.ExportService;
 import io.survey.service.FormulaireService;
 import io.survey.service.dto.FormulaireDTO;
+import io.survey.service.dto.export.QuestionnaireFormulaireDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
@@ -33,7 +34,7 @@ public class ExportResource {
     @GetMapping("/export/formulaires")
     public ResponseEntity<?> exportFormulaires() throws IOException {
         log.debug("REST request to export formulaires");
-        List<FormulaireDTO> responses = formulaireService.findAll();
+        List<QuestionnaireFormulaireDTO> responses = exportService.getResponses();
         File templateFile = ResourceUtils.getFile("classpath:static/templates/formulaires.xlsx");
         InputStreamResource file = new InputStreamResource(exportService.generateFile(responses, templateFile));
         return ResponseEntity.ok()
