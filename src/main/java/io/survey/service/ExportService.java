@@ -79,7 +79,7 @@ public class ExportService {
     public Set<QuestionnaireLigneFormulaireDTO> enrichLigneFormulaire(QuestionnaireFormulaireDTO formulaire,
                                                                        QuestionnaireFormulaireSectionDTO section) {
         List<LigneFormulaire> lignesFormulaire = ligneFormulaireRepository
-                .findByFormulaire_IdAndQuestion_Section_IdOrderByOrdreAsc(formulaire.getFormulaireId(), section.getId());
+                .findByFormulaire_IdAndQuestion_Section_IdOrderByQuestion_OrdreAsc(formulaire.getFormulaireId(), section.getId());
 
         return new HashSet<>(questionnaireLigneFormulaireMapper.toDto(lignesFormulaire));
     }
