@@ -92,6 +92,7 @@ public class ExportService {
             context.putVar("formulaires", responses);
             context.putVar("sheetNames", responses.stream()
                     .map(QuestionnaireFormulaireDTO::getNumero)
+                    .map(Object::toString)
                     .collect(Collectors.toList()));
             JxlsHelper.getInstance().processTemplate(is, outputStream, context);
         }
