@@ -5,7 +5,6 @@ import io.survey.model.LigneFormulaire;
 import io.survey.repository.FormulaireRepository;
 import io.survey.repository.LigneFormulaireRepository;
 import io.survey.repository.SectionRepository;
-import io.survey.service.dto.FormulaireDTO;
 import io.survey.service.dto.export.QuestionnaireFormulaireDTO;
 import io.survey.service.dto.export.QuestionnaireFormulaireSectionDTO;
 import io.survey.service.dto.export.QuestionnaireLigneFormulaireDTO;
@@ -51,7 +50,7 @@ public class ExportService {
     }
 
     public List<QuestionnaireFormulaireDTO> getResponses() {
-        return formulaireRepository.findAllOrderByNumeroAsc()
+        return formulaireRepository.findAllByOrderByNumeroAsc()
                 .stream().map(this::getResponses)
                 .collect(Collectors.toList());
     }
