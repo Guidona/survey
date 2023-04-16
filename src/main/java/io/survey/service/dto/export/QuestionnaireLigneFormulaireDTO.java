@@ -13,6 +13,6 @@ public class QuestionnaireLigneFormulaireDTO implements Serializable {
 
     private String libelle;
 
-    private String contenu;
+    private String reponse;
 
 }
