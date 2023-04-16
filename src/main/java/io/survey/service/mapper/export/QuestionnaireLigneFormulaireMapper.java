@@ -12,7 +12,7 @@ public interface QuestionnaireLigneFormulaireMapper extends EntityMapper<Questio
 
     @Mapping(target = "code", source = "question.code")
     @Mapping(target = "libelle", source = "question.libelle")
-    @Mapping(target = "reponse", source = "contenu")
+    @Mapping(target = "contenu", source = "contenu")
     // @Mapping(target = "", source = "")
     QuestionnaireLigneFormulaireDTO toDto(LigneFormulaire s);
 }
