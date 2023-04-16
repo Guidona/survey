@@ -18,9 +18,7 @@ import org.jxls.util.JxlsHelper;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -86,7 +84,9 @@ public class ExportService {
         List<LigneFormulaire> lignesFormulaire = ligneFormulaireRepository
                 .findByFormulaire_IdAndQuestion_Section_Id(formulaire.getFormulaireId(), section.getId());
 
-        return questionnaireLigneFormulaireMapper.toDto(lignesFormulaire);
+        Set<QuestionnaireLigneFormulaireDTO> setLignes = new HashSet<>(questionnaireLigneFormulaireMapper.toDto(lignesFormulaire));
+
+        return new ArrayList<>(setLignes);
     }
 
     public ByteArrayInputStream generateFile(List<FormulaireDTO> responses, File filelocator) throws IOException {
