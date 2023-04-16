@@ -2,7 +2,6 @@ package io.survey.service;
 
 import io.survey.model.Formulaire;
 import io.survey.model.LigneFormulaire;
-import io.survey.model.Section;
 import io.survey.repository.FormulaireRepository;
 import io.survey.repository.LigneFormulaireRepository;
 import io.survey.repository.SectionRepository;
@@ -71,22 +70,18 @@ public class ExportService {
 
     public QuestionnaireFormulaireDTO enrichSections(QuestionnaireFormulaireDTO formulaire) {
         List<QuestionnaireFormulaireSectionDTO> questionnaireFormulaireSectionsDTO = questionnaireFormulaireSectionMapper
-                .toDto(sectionRepository.findByQuestionnaire_Id(formulaire.getQuestionnaireId()));
-        questionnaireFormulaireSectionsDTO.forEach(section -> {
-            section.setLignesFormulaire(enrichLigneFormulaire(formulaire, section));
-        });
+                .toDto(sectionRepository.findByQuestionnaire_IdOrderByOrdreAsc(formulaire.getQuestionnaireId()));
+        questionnaireFormulaireSectionsDTO.forEach(section -> section.setLignesFormulaire(enrichLigneFormulaire(formulaire, section)));
         formulaire.setSections(questionnaireFormulaireSectionsDTO);
         return formulaire;
     }
 
-    public List<QuestionnaireLigneFormulaireDTO> enrichLigneFormulaire(QuestionnaireFormulaireDTO formulaire,
+    public Set<QuestionnaireLigneFormulaireDTO> enrichLigneFormulaire(QuestionnaireFormulaireDTO formulaire,
                                                                        QuestionnaireFormulaireSectionDTO section) {
         List<LigneFormulaire> lignesFormulaire = ligneFormulaireRepository
-                .findByFormulaire_IdAndQuestion_Section_Id(formulaire.getFormulaireId(), section.getId());
+                .findByFormulaire_IdAndQuestion_Section_IdOrderByOrdreAsc(formulaire.getFormulaireId(), section.getId());
 
-        Set<QuestionnaireLigneFormulaireDTO> setLignes = new HashSet<>(questionnaireLigneFormulaireMapper.toDto(lignesFormulaire));
-
-        return new ArrayList<>(setLignes);
+        return new HashSet<>(questionnaireLigneFormulaireMapper.toDto(lignesFormulaire));
     }
 
     public ByteArrayInputStream generateFile(List<FormulaireDTO> responses, File filelocator) throws IOException {

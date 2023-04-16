@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 @Data
 public class QuestionnaireFormulaireSectionDTO implements Serializable {
@@ -16,6 +17,6 @@ public class QuestionnaireFormulaireSectionDTO implements Serializable {
 
     private List<QuestionnaireFormulaireSectionDTO> sections;
 
-    private List<QuestionnaireLigneFormulaireDTO> lignesFormulaire;
+    private Set<QuestionnaireLigneFormulaireDTO> lignesFormulaire;
 
 }

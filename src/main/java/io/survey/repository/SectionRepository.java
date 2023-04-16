@@ -13,6 +13,6 @@ import java.util.List;
 @Repository
 public interface SectionRepository extends JpaRepository<Section, Long> {
 
-    List<Section> findByQuestionnaire_Id(Long questionnaireId);
+    List<Section> findByQuestionnaire_IdOrderByOrdreAsc(Long questionnaireId);
 
 }
