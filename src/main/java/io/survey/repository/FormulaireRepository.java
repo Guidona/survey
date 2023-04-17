@@ -16,6 +16,9 @@ import java.util.List;
 public interface FormulaireRepository extends JpaRepository<Formulaire, Long> {
 
     List<Formulaire> findAllByOrderByNumeroAsc();
+
+    List<Formulaire> findByQuestionnaire_IdOrderByNumeroAsc(Long questionnaireId);
+
     Page<Formulaire> findByQuestionnaire_Id(Long questionnaireId, Pageable pageable);
 
 }

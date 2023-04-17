@@ -12,10 +12,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -32,9 +36,16 @@ public class ExportResource {
     }
 
     @GetMapping("/export/formulaires")
-    public ResponseEntity<?> exportFormulaires() throws IOException {
+    public ResponseEntity<?> exportFormulaires(@RequestParam(value = "questionnaireId", required = false) Long questionnaireId,
+                                               @RequestParam(value = "formulaireId", required = false) Long formulaireId) throws IOException {
         log.debug("REST request to export formulaires");
-        List<QuestionnaireFormulaireDTO> responses = exportService.getResponses();
+        List<QuestionnaireFormulaireDTO> responses = new ArrayList<>();
+        if(questionnaireId != null)
+            responses = exportService.getResponsesByQuestionnaire(questionnaireId);
+        else if(formulaireId != null)
+            responses = Collections.singletonList(exportService.getResponses(formulaireId));
+        else responses = exportService.getResponses();
+
         File templateFile = ResourceUtils.getFile("classpath:static/templates/formulaires.xlsx");
         InputStreamResource file = new InputStreamResource(exportService.generateFile(responses, templateFile));
         return ResponseEntity.ok()
@@ -45,7 +56,12 @@ public class ExportResource {
     }
 
     @GetMapping("/data/formulaires")
-    public ResponseEntity<?> exportData() throws IOException {
+    public ResponseEntity<?> exportData(@RequestParam(value = "questionnaireId", required = false) Long questionnaireId,
+                                        @RequestParam(value = "formulaireId", required = false) Long formulaireId) throws IOException {
+        if(questionnaireId != null)
+            return ResponseEntity.ok(exportService.getResponsesByQuestionnaire(questionnaireId));
+        if(formulaireId != null)
+            return ResponseEntity.ok(Collections.singletonList(exportService.getResponses(formulaireId)));
         return ResponseEntity.ok(exportService.getResponses());
     }
 

@@ -55,6 +55,12 @@ public class ExportService {
                 .collect(Collectors.toList());
     }
 
+    public List<QuestionnaireFormulaireDTO> getResponsesByQuestionnaire(Long questionnaireId) {
+        return formulaireRepository.findByQuestionnaire_IdOrderByNumeroAsc(questionnaireId)
+                .stream().map(this::getResponses)
+                .collect(Collectors.toList());
+    }
+
     public QuestionnaireFormulaireDTO getResponses(Formulaire formulaire) {
         return getResponses(formulaire.getId());
     }
