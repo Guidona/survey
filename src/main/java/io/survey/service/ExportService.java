@@ -5,9 +5,11 @@ import io.survey.model.LigneFormulaire;
 import io.survey.repository.FormulaireRepository;
 import io.survey.repository.LigneFormulaireRepository;
 import io.survey.repository.SectionRepository;
+import io.survey.service.dto.export.FlatQuestionnaireFormulaireDTO;
 import io.survey.service.dto.export.QuestionnaireFormulaireDTO;
 import io.survey.service.dto.export.QuestionnaireFormulaireSectionDTO;
 import io.survey.service.dto.export.QuestionnaireLigneFormulaireDTO;
+import io.survey.service.mapper.export.FlatQuestionnaireFormulaireMapper;
 import io.survey.service.mapper.export.QuestionnaireFormulaireMapper;
 import io.survey.service.mapper.export.QuestionnaireFormulaireSectionMapper;
 import io.survey.service.mapper.export.QuestionnaireLigneFormulaireMapper;
@@ -34,12 +36,15 @@ public class ExportService {
 
     private QuestionnaireLigneFormulaireMapper questionnaireLigneFormulaireMapper;
 
+    private FlatQuestionnaireFormulaireMapper flatQuestionnaireFormulaireMapper;
+
     public ExportService(FormulaireRepository formulaireRepository,
                          SectionRepository sectionRepository,
                          LigneFormulaireRepository ligneFormulaireRepository,
                          QuestionnaireFormulaireMapper questionnaireFormulaireMapper,
                          QuestionnaireFormulaireSectionMapper questionnaireFormulaireSectionMapper,
-                         QuestionnaireLigneFormulaireMapper questionnaireLigneFormulaireMapper) {
+                         QuestionnaireLigneFormulaireMapper questionnaireLigneFormulaireMapper,
+                         FlatQuestionnaireFormulaireMapper flatQuestionnaireFormulaireMapper) {
 
         this.formulaireRepository = formulaireRepository;
         this.sectionRepository = sectionRepository;
@@ -47,6 +52,7 @@ public class ExportService {
         this.questionnaireFormulaireMapper = questionnaireFormulaireMapper;
         this.questionnaireFormulaireSectionMapper = questionnaireFormulaireSectionMapper;
         this.questionnaireLigneFormulaireMapper = questionnaireLigneFormulaireMapper;
+        this.flatQuestionnaireFormulaireMapper = flatQuestionnaireFormulaireMapper;
     }
 
     public List<QuestionnaireFormulaireDTO> getResponses() {
@@ -65,12 +71,37 @@ public class ExportService {
         return getResponses(formulaire.getId());
     }
 
+
     public QuestionnaireFormulaireDTO getResponses(Long formulaireId) {
         Optional<QuestionnaireFormulaireDTO> formulaire = formulaireRepository.findById(formulaireId)
                 .map(questionnaireFormulaireMapper::toDto)
                 .map(this::enrichSections);
 
         return formulaire.orElse(new QuestionnaireFormulaireDTO());
+    }
+
+    public List<FlatQuestionnaireFormulaireDTO> getFlatResponses() {
+        return formulaireRepository.findAllByOrderByNumeroAsc()
+                .stream().map(this::getFlatResponses)
+                .collect(Collectors.toList());
+    }
+
+    public List<FlatQuestionnaireFormulaireDTO> getFlatResponsesByQuestionnaire(Long questionnaireId) {
+        return formulaireRepository.findByQuestionnaire_IdOrderByNumeroAsc(questionnaireId)
+                .stream().map(this::getFlatResponses)
+                .collect(Collectors.toList());
+    }
+
+    public FlatQuestionnaireFormulaireDTO getFlatResponses(Formulaire formulaire) {
+        return getFlatResponses(formulaire.getId());
+    }
+
+    public FlatQuestionnaireFormulaireDTO getFlatResponses(Long formulaireId) {
+        Optional<FlatQuestionnaireFormulaireDTO> formulaire = formulaireRepository.findById(formulaireId)
+                .map(flatQuestionnaireFormulaireMapper::toDto)
+                .map(this::enrichLigneFormulaire);
+
+        return formulaire.orElse(new FlatQuestionnaireFormulaireDTO());
     }
 
     public QuestionnaireFormulaireDTO enrichSections(QuestionnaireFormulaireDTO formulaire) {
@@ -87,6 +118,14 @@ public class ExportService {
                 .findByFormulaire_IdAndQuestion_Section_IdOrderByQuestion_OrdreAsc(formulaire.getFormulaireId(), section.getId());
 
         return new HashSet<>(questionnaireLigneFormulaireMapper.toDto(lignesFormulaire));
+    }
+
+    public FlatQuestionnaireFormulaireDTO enrichLigneFormulaire(FlatQuestionnaireFormulaireDTO formulaire) {
+        List<LigneFormulaire> lignesFormulaire = ligneFormulaireRepository
+                .findByFormulaire_IdOrderByQuestion_CodeAsc(formulaire.getFormulaireId());
+
+        formulaire.setLignesFormulaire(new HashSet<>(questionnaireLigneFormulaireMapper.toDto(lignesFormulaire)));
+        return formulaire;
     }
 
     public ByteArrayInputStream generateFile(List<QuestionnaireFormulaireDTO> responses, File filelocator) throws IOException {

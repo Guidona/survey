@@ -5,6 +5,8 @@ import io.survey.repository.QuestionnaireRepository;
 import io.survey.service.QuestionnaireService;
 import io.survey.service.dto.QuestionnaireDTO;
 import io.survey.service.mapper.QuestionnaireMapper;
+
+import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -67,6 +69,12 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
     public Page<QuestionnaireDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Questionnaires");
         return questionnaireRepository.findAll(pageable).map(questionnaireMapper::toDto);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<QuestionnaireDTO> findAll() {
+        return questionnaireMapper.toDto(questionnaireRepository.findAll());
     }
 
     @Override

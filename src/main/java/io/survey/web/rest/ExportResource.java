@@ -65,5 +65,15 @@ public class ExportResource {
         return ResponseEntity.ok(exportService.getResponses());
     }
 
+    @GetMapping("/flat-data/formulaires")
+    public ResponseEntity<?> exportFlatData(@RequestParam(value = "questionnaireId", required = false) Long questionnaireId,
+                                        @RequestParam(value = "formulaireId", required = false) Long formulaireId) throws IOException {
+        if(questionnaireId != null)
+            return ResponseEntity.ok(exportService.getFlatResponsesByQuestionnaire(questionnaireId));
+        if(formulaireId != null)
+            return ResponseEntity.ok(Collections.singletonList(exportService.getFlatResponses(formulaireId)));
+        return ResponseEntity.ok(exportService.getFlatResponses());
+    }
+
 
 }
