@@ -122,7 +122,7 @@ public class ExportService {
 
     public FlatQuestionnaireFormulaireDTO enrichLigneFormulaire(FlatQuestionnaireFormulaireDTO formulaire) {
         List<LigneFormulaire> lignesFormulaire = ligneFormulaireRepository
-                .findByFormulaire_IdOrderByQuestion_Section_OrdreAscAndOrderQuestion_CodeAsc(formulaire.getFormulaireId());
+                .findByFormulaire_IdOrderByQuestion_Section_OrdreAsc(formulaire.getFormulaireId());
 
         formulaire.setLignesFormulaire(new HashSet<>(questionnaireLigneFormulaireMapper.toDto(lignesFormulaire)));
         return formulaire;
