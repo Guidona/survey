@@ -128,9 +128,10 @@ public class ExportService {
     }
 
     public FlatQuestionnaireFormulaireDTO enrichLigneFormulaire(FlatQuestionnaireFormulaireDTO formulaire) {
-//        List<LigneFormulaire> lignesFormulaire = ligneFormulaireRepository
-//                .findByFormulaire_IdOrderByQuestion_OrdreAsc(formulaire.getFormulaireId());
-        formulaire.setLignesFormulaire(enrichFlatSections(formulaire, new LinkedHashSet<>()));
+        List<LigneFormulaire> lignesFormulaire = ligneFormulaireRepository
+                .findByFormulaire_IdOrderByQuestion_OrdreAsc(formulaire.getFormulaireId());
+
+        formulaire.setLignesFormulaire(new LinkedHashSet<>(questionnaireLigneFormulaireMapper.toDto(lignesFormulaire)));
         return formulaire;
     }
 
