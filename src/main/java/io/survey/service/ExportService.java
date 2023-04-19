@@ -122,7 +122,7 @@ public class ExportService {
 
     public FlatQuestionnaireFormulaireDTO enrichLigneFormulaire(FlatQuestionnaireFormulaireDTO formulaire) {
         List<LigneFormulaire> lignesFormulaire = ligneFormulaireRepository
-                .findByFormulaire_IdOrderByQuestion_IdAsc(formulaire.getFormulaireId());
+                .findByFormulaire_IdOrderByQuestion_OrdreAsc(formulaire.getFormulaireId());
 
         formulaire.setLignesFormulaire(new LinkedHashSet<>(questionnaireLigneFormulaireMapper.toDto(lignesFormulaire)));
         return formulaire;
@@ -136,6 +136,21 @@ public class ExportService {
             context.putVar("formulaires", responses);
             context.putVar("sheetNames", responses.stream()
                     .map(QuestionnaireFormulaireDTO::getNumero)
+                    .map(Object::toString)
+                    .collect(Collectors.toList()));
+            JxlsHelper.getInstance().processTemplate(is, outputStream, context);
+        }
+        return new ByteArrayInputStream(outputStream.toByteArray());
+    }
+
+    public ByteArrayInputStream generateFlatFile(List<FlatQuestionnaireFormulaireDTO> responses, File filelocator) throws IOException {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        //File file = ResourceUtils.getFile("classpath:static/templates/listing.xlsx");
+        try (InputStream is = new FileInputStream(filelocator)) {
+            Context context = new Context();
+            context.putVar("formulaires", responses);
+            context.putVar("sheetNames", responses.stream()
+                    .map(FlatQuestionnaireFormulaireDTO::getNumero)
                     .map(Object::toString)
                     .collect(Collectors.toList()));
             JxlsHelper.getInstance().processTemplate(is, outputStream, context);
