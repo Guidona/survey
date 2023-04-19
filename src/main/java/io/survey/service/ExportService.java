@@ -107,24 +107,30 @@ public class ExportService {
     public QuestionnaireFormulaireDTO enrichSections(QuestionnaireFormulaireDTO formulaire) {
         List<QuestionnaireFormulaireSectionDTO> questionnaireFormulaireSectionsDTO = questionnaireFormulaireSectionMapper
                 .toDto(sectionRepository.findByQuestionnaire_IdOrderByOrdreAsc(formulaire.getQuestionnaireId()));
-        questionnaireFormulaireSectionsDTO.forEach(section -> section.setLignesFormulaire(enrichLigneFormulaire(formulaire, section)));
+        questionnaireFormulaireSectionsDTO.forEach(section -> section.setLignesFormulaire(enrichLigneFormulaire(formulaire.getFormulaireId(), section)));
         formulaire.setSections(questionnaireFormulaireSectionsDTO);
         return formulaire;
     }
 
-    public Set<QuestionnaireLigneFormulaireDTO> enrichLigneFormulaire(QuestionnaireFormulaireDTO formulaire,
+    public LinkedHashSet<QuestionnaireLigneFormulaireDTO> enrichFlatSections(FlatQuestionnaireFormulaireDTO formulaire, LinkedHashSet<QuestionnaireLigneFormulaireDTO> lignes) {
+        List<QuestionnaireFormulaireSectionDTO> questionnaireFormulaireSectionsDTO = questionnaireFormulaireSectionMapper
+                .toDto(sectionRepository.findByQuestionnaire_IdOrderByOrdreAsc(formulaire.getQuestionnaireId()));
+        questionnaireFormulaireSectionsDTO.forEach(section -> lignes.addAll(enrichLigneFormulaire(formulaire.getFormulaireId(), section)));
+        return lignes;
+    }
+
+    public Set<QuestionnaireLigneFormulaireDTO> enrichLigneFormulaire(Long formulaireId,
                                                                        QuestionnaireFormulaireSectionDTO section) {
         List<LigneFormulaire> lignesFormulaire = ligneFormulaireRepository
-                .findByFormulaire_IdAndQuestion_Section_IdOrderByQuestion_OrdreAsc(formulaire.getFormulaireId(), section.getId());
+                .findByFormulaire_IdAndQuestion_Section_IdOrderByQuestion_OrdreAsc(formulaireId, section.getId());
 
         return new HashSet<>(questionnaireLigneFormulaireMapper.toDto(lignesFormulaire));
     }
 
     public FlatQuestionnaireFormulaireDTO enrichLigneFormulaire(FlatQuestionnaireFormulaireDTO formulaire) {
-        List<LigneFormulaire> lignesFormulaire = ligneFormulaireRepository
-                .findByFormulaire_IdOrderByQuestion_OrdreAsc(formulaire.getFormulaireId());
-
-        formulaire.setLignesFormulaire(new LinkedHashSet<>(questionnaireLigneFormulaireMapper.toDto(lignesFormulaire)));
+//        List<LigneFormulaire> lignesFormulaire = ligneFormulaireRepository
+//                .findByFormulaire_IdOrderByQuestion_OrdreAsc(formulaire.getFormulaireId());
+        formulaire.setLignesFormulaire(enrichFlatSections(formulaire, new LinkedHashSet<>()));
         return formulaire;
     }
 
