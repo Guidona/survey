@@ -124,7 +124,8 @@ public class ExportService {
         List<LigneFormulaire> lignesFormulaire = ligneFormulaireRepository
                 .findByFormulaire_IdOrderByQuestion_Section_OrdreAsc(formulaire.getFormulaireId());
 
-        formulaire.setLignesFormulaire(new HashSet<>(questionnaireLigneFormulaireMapper.toDto(lignesFormulaire)));
+        formulaire.setLignesFormulaire(new HashSet<>(questionnaireLigneFormulaireMapper.toDto(lignesFormulaire))
+                .stream().sorted(Comparator.comparing(QuestionnaireLigneFormulaireDTO::getCode)).collect(Collectors.toCollection(LinkedHashSet::new)));
         return formulaire;
     }
 
