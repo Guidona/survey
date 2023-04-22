@@ -17,11 +17,7 @@ public interface FormulaireRepository extends JpaRepository<Formulaire, Long>, J
 
     List<Formulaire> findAllByOrderByNumeroAsc();
 
-    List<Formulaire> findAllByOrderByExportOrderAsc();
-
     List<Formulaire> findByQuestionnaire_IdOrderByNumeroAsc(Long questionnaireId);
-
-    List<Formulaire> findByQuestionnaire_IdOrderByExportOrderAsc(Long questionnaireId);
 
     Page<Formulaire> findByQuestionnaire_Id(Long questionnaireId, Pageable pageable);
 

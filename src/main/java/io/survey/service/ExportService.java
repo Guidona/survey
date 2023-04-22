@@ -81,13 +81,13 @@ public class ExportService {
     }
 
     public List<FlatQuestionnaireFormulaireDTO> getFlatResponses() {
-        return formulaireRepository.findAllByOrderByExportOrderAsc()
+        return formulaireRepository.findAllByOrderByNumeroAsc()
                 .stream().map(this::getFlatResponses)
                 .collect(Collectors.toList());
     }
 
     public List<FlatQuestionnaireFormulaireDTO> getFlatResponsesByQuestionnaire(Long questionnaireId) {
-        return formulaireRepository.findByQuestionnaire_IdOrderByExportOrderAsc(questionnaireId)
+        return formulaireRepository.findByQuestionnaire_IdOrderByNumeroAsc(questionnaireId)
                 .stream().map(this::getFlatResponses)
                 .collect(Collectors.toList());
     }
@@ -122,7 +122,7 @@ public class ExportService {
     public Set<QuestionnaireLigneFormulaireDTO> enrichLigneFormulaire(Long formulaireId,
                                                                        QuestionnaireFormulaireSectionDTO section) {
         List<LigneFormulaire> lignesFormulaire = ligneFormulaireRepository
-                .findByFormulaire_IdAndQuestion_Section_IdOrderByQuestion_OrdreAsc(formulaireId, section.getId());
+                .findByFormulaire_IdAndQuestion_Section_IdOrderByQuestion_ExportOrderAsc(formulaireId, section.getId());
 
         return new HashSet<>(questionnaireLigneFormulaireMapper.toDto(lignesFormulaire));
     }
