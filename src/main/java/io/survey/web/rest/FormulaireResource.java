@@ -1,8 +1,10 @@
 package io.survey.web.rest;
 
 import io.survey.repository.FormulaireRepository;
+import io.survey.service.FormulaireQueryService;
 import io.survey.service.FormulaireService;
 import io.survey.service.dto.FormulaireDTO;
+import io.survey.service.dto.FormulaireQueryDTO;
 import io.survey.web.rest.errors.BadRequestAlertException;
 
 import java.net.URI;
@@ -11,7 +13,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -19,15 +20,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.repository.query.Param;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 /**
  * REST controller for managing {@link io.survey.model.Formulaire}.
@@ -44,9 +40,14 @@ public class FormulaireResource {
 
     private final FormulaireRepository formulaireRepository;
 
-    public FormulaireResource(FormulaireService formulaireService, FormulaireRepository formulaireRepository) {
+    private final FormulaireQueryService formulaireQueryService;
+
+    public FormulaireResource(FormulaireService formulaireService,
+                              FormulaireRepository formulaireRepository,
+                              FormulaireQueryService formulaireQueryService) {
         this.formulaireService = formulaireService;
         this.formulaireRepository = formulaireRepository;
+        this.formulaireQueryService = formulaireQueryService;
     }
 
     /**
@@ -147,10 +148,19 @@ public class FormulaireResource {
      */
     @GetMapping("/formulaires")
     public ResponseEntity<List<FormulaireDTO>> getAllFormulaires(@RequestParam(value = "questionnaireId", required = false) Long questionnaireId,
+                                                                 @RequestParam(value = "reference", required = false) String reference,
                                                                  Pageable pageable) {
         log.debug("REST request to get a page of Formulaires");
         Page<FormulaireDTO> page = questionnaireId == null ? formulaireService.findAll(pageable) :
                 formulaireService.findByQuestionnaire(questionnaireId, pageable);
+        return ResponseEntity.ok().body(page.getContent());
+    }
+
+    @GetMapping("/formulaires-criteria")
+    public ResponseEntity<List<FormulaireDTO>> getAllFormulairesCriteria(FormulaireQueryDTO formulaireQueryDTO,
+                                                                         Pageable pageable) {
+        log.debug("REST request to get a page of Formulaires");
+        Page<FormulaireDTO> page = formulaireQueryService.findAll(formulaireQueryDTO, pageable);
         return ResponseEntity.ok().body(page.getContent());
     }
 

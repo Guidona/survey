@@ -17,6 +17,8 @@ public class FormulaireDTO implements Serializable {
 
     private Integer numero;
 
+    private String reference;
+
     @JsonIgnore
     private Set<SectionDTO> sections = new HashSet<>();
 
@@ -70,6 +72,14 @@ public class FormulaireDTO implements Serializable {
 
     public void setQuestionnaireId(Long questionnaireId) {
         this.questionnaireId = questionnaireId;
+    }
+
+    public String getReference() {
+        return reference;
+    }
+
+    public void setReference(String reference) {
+        this.reference = reference;
     }
 
     @Override

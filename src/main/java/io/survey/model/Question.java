@@ -61,6 +61,9 @@ public class Question implements Serializable{
     @Column(name = "value_type")
     private QuestionType questionType;
 
+    @Column(name = "export_order", nullable = true)
+    private Long exportOrder;
+
     @Override
     public String toString() {
         return "Question{" +

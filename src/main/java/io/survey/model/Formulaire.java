@@ -52,6 +52,9 @@ public class Formulaire implements Serializable {
     @JsonBackReference
     private Questionnaire questionnaire;
 
+    @Column(name = "reference", nullable = true)
+    private String reference;
+
     @Override
     public String toString() {
         return "Formulaire{" +

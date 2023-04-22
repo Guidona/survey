@@ -81,13 +81,13 @@ public class ExportService {
     }
 
     public List<FlatQuestionnaireFormulaireDTO> getFlatResponses() {
-        return formulaireRepository.findAllByOrderByNumeroAsc()
+        return formulaireRepository.findAllByOrderByExportOrderAsc()
                 .stream().map(this::getFlatResponses)
                 .collect(Collectors.toList());
     }
 
     public List<FlatQuestionnaireFormulaireDTO> getFlatResponsesByQuestionnaire(Long questionnaireId) {
-        return formulaireRepository.findByQuestionnaire_IdOrderByNumeroAsc(questionnaireId)
+        return formulaireRepository.findByQuestionnaire_IdOrderByExportOrderAsc(questionnaireId)
                 .stream().map(this::getFlatResponses)
                 .collect(Collectors.toList());
     }
