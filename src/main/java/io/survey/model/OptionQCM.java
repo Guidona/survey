@@ -35,6 +35,7 @@ public class OptionQCM implements Serializable {
     private Integer ordre;
 
     @ManyToOne
+    @JsonIgnoreProperties(value = { "questions", "section", "questionnaire", "sections", "dependsOn" })
     private Section section;
 
     public OptionQCM(Long id) {
