@@ -37,7 +37,7 @@ public class FormulaireQueryService {
         if(formulaireQueryDTO != null) {
             if(formulaireQueryDTO.getFormulaireId() != null) {
                 specification = specification.and(((root, query, criteriaBuilder) ->
-                    criteriaBuilder.equal(root.get("formualaireId"), formulaireQueryDTO.getFormulaireId())
+                    criteriaBuilder.equal(root.get("formulaireId"), formulaireQueryDTO.getFormulaireId())
                 ));
             }
             if(formulaireQueryDTO.getReference() != null) {
