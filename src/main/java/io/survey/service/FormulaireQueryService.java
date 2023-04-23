@@ -35,9 +35,9 @@ public class FormulaireQueryService {
     Specification<Formulaire> createSpecification(FormulaireQueryDTO formulaireQueryDTO) {
         Specification<Formulaire> specification = Specification.where(null);
         if(formulaireQueryDTO != null) {
-            if(formulaireQueryDTO.getFormulaireId() != null) {
+            if(formulaireQueryDTO.getQuestionnaireId() != null) {
                 specification = specification.and(((root, query, criteriaBuilder) ->
-                    criteriaBuilder.equal(root.get("formulaire_id"), formulaireQueryDTO.getFormulaireId())
+                    criteriaBuilder.equal(root.get("questionnaire_id"), formulaireQueryDTO.getQuestionnaireId())
                 ));
             }
             if(formulaireQueryDTO.getReference() != null) {

@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class FormulaireQueryDTO {
 
-    private Long formulaireId;
+    private Long questionnaireId;
 
     private String reference;
 
