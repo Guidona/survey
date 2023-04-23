@@ -34,4 +34,10 @@ public class OptionQCM implements Serializable {
     @Column(name = "ordre")
     private Integer ordre;
 
+    @ManyToOne
+    private Section section;
+
+    public OptionQCM(Long id) {
+        this.id = id;
+    }
 }

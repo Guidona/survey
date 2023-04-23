@@ -17,6 +17,8 @@ public class OptionQCMDTO implements Serializable {
 
     private Integer ordre;
 
+    private Long sectionId;
+
     public Long getId() {
         return id;
     }
@@ -47,6 +49,14 @@ public class OptionQCMDTO implements Serializable {
 
     public void setOrdre(Integer ordre) {
         this.ordre = ordre;
+    }
+
+    public Long getSectionId() {
+        return sectionId;
+    }
+
+    public void setSectionId(Long sectionId) {
+        this.sectionId = sectionId;
     }
 
     @Override

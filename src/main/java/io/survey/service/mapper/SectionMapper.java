@@ -39,4 +39,11 @@ public interface SectionMapper extends EntityMapper<SectionDTO, Section> {
                 }).collect(Collectors.toList()));
     }
 
+    default Section fromId(Long id) {
+        if (id == null) return null;
+        Section section = new Section();
+        section.setId(id);
+        return section;
+    }
+
 }
