@@ -9,4 +9,6 @@ public class FormulaireQueryDTO {
 
     private String reference;
 
+    private String numero;
+
 }

@@ -19,7 +19,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "formulaire", uniqueConstraints =
-    @UniqueConstraint(name = "libelle_numero", columnNames = {"libelle", "numero"})
+    @UniqueConstraint(name = "libelle_questionnaire", columnNames = {"questionnaire_id", "numero"})
 )
 public class Formulaire implements Serializable {
 

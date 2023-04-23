@@ -45,6 +45,11 @@ public class FormulaireQueryService {
                         criteriaBuilder.equal(root.get("reference"), formulaireQueryDTO.getReference())
                 ));
             }
+            if(formulaireQueryDTO.getNumero() != null) {
+                specification = specification.and((root, query, criteriaBuilder) ->
+                        criteriaBuilder.equal(root.get("numero"), formulaireQueryDTO.getNumero())
+                );
+            }
         }
         return specification;
     }
