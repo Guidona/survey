@@ -16,18 +16,32 @@ public class QuestionnaireLigneFormulaireDTO implements Serializable {
 
     private String contenu;
 
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        QuestionnaireLigneFormulaireDTO that = (QuestionnaireLigneFormulaireDTO) o;
+//        return Objects.equals(code, that.code) && Objects.equals(libelle, that.libelle);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(code, libelle);
+//    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         QuestionnaireLigneFormulaireDTO that = (QuestionnaireLigneFormulaireDTO) o;
-        return Objects.equals(code, that.code) && Objects.equals(libelle, that.libelle);
+        return Objects.equals(code, that.code) &&
+                Objects.equals(libelle, that.libelle) &&
+                Objects.equals(contenu, that.contenu);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(code, libelle);
+        return Objects.hash(code, libelle, contenu);
     }
-
-
 }
