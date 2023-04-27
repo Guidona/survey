@@ -1,13 +1,17 @@
 package io.survey.service.impl;
 
 import io.survey.model.LigneFormulaire;
+import io.survey.model.Question;
 import io.survey.repository.LigneFormulaireRepository;
+import io.survey.repository.QuestionRepository;
 import io.survey.service.LigneFormulaireService;
 import io.survey.service.dto.LigneFormulaireDTO;
 import io.survey.service.mapper.LigneFormulaireMapper;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -28,9 +32,14 @@ public class LigneFormulaireServiceImpl implements LigneFormulaireService {
 
     private final LigneFormulaireMapper ligneFormulaireMapper;
 
-    public LigneFormulaireServiceImpl(LigneFormulaireRepository ligneFormulaireRepository, LigneFormulaireMapper ligneFormulaireMapper) {
+    private final QuestionRepository questionRepository;
+
+    public LigneFormulaireServiceImpl(LigneFormulaireRepository ligneFormulaireRepository,
+                                      LigneFormulaireMapper ligneFormulaireMapper,
+                                      QuestionRepository questionRepository) {
         this.ligneFormulaireRepository = ligneFormulaireRepository;
         this.ligneFormulaireMapper = ligneFormulaireMapper;
+        this.questionRepository = questionRepository;
     }
 
     @Override
@@ -38,6 +47,10 @@ public class LigneFormulaireServiceImpl implements LigneFormulaireService {
         log.debug("Request to save LigneFormulaire : {}", ligneFormulaireDTO);
         LigneFormulaire ligneFormulaire = ligneFormulaireMapper.toEntity(ligneFormulaireDTO);
         ligneFormulaire = ligneFormulaireRepository.save(ligneFormulaire);
+
+        final LigneFormulaire finalLigneFormulaire = ligneFormulaire;
+        CompletableFuture.runAsync(() -> this.saveAll(finalLigneFormulaire));
+
         return ligneFormulaireMapper.toDto(ligneFormulaire);
     }
 
@@ -46,7 +59,29 @@ public class LigneFormulaireServiceImpl implements LigneFormulaireService {
         log.debug("Request to update LigneFormulaire : {}", ligneFormulaireDTO);
         LigneFormulaire ligneFormulaire = ligneFormulaireMapper.toEntity(ligneFormulaireDTO);
         ligneFormulaire = ligneFormulaireRepository.save(ligneFormulaire);
+
+        final LigneFormulaire finalLigneFormulaire = ligneFormulaire;
+        CompletableFuture.runAsync(() -> this.saveAll(finalLigneFormulaire));
+
         return ligneFormulaireMapper.toDto(ligneFormulaire);
+    }
+
+    // Recursive function to save all unsaved parent questions of the given question
+    // - Important for questionnaire export
+    private void saveAll(LigneFormulaire ligneFormulaire) {
+        questionRepository.findByQuestion_Id(ligneFormulaire.getQuestion().getId())
+                .ifPresent(parentQuestion -> {
+                    if(!ligneFormulaireRepository.existsByFormulaire_IdAndQuestion_Id(
+                            ligneFormulaire.getFormulaire().getId(),
+                            parentQuestion.getId())) {
+                        LigneFormulaire ligne = new LigneFormulaire();
+                        ligne.setFormulaire(ligneFormulaire.getFormulaire());
+                        ligne.setContenu("");
+                        ligne.setQuestion(parentQuestion);
+                        ligne = ligneFormulaireRepository.save(ligne);
+                        saveAll(ligne);
+                    }
+                });
     }
 
     @Override

@@ -148,7 +148,6 @@ public class FormulaireResource {
      */
     @GetMapping("/formulaires")
     public ResponseEntity<List<FormulaireDTO>> getAllFormulaires(@RequestParam(value = "questionnaireId", required = false) Long questionnaireId,
-                                                                 @RequestParam(value = "reference", required = false) String reference,
                                                                  Pageable pageable) {
         log.debug("REST request to get a page of Formulaires");
         Page<FormulaireDTO> page = questionnaireId == null ? formulaireService.findAll(pageable) :

@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:h2:mem:db;DB_CLOSE_DELAY=-1
+    password:
+    username:
+  jpa:
+    database: H2
+    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+  test:
+    database:
+      replace: none
+  liquibase:
+    enabled: false
+    change-log: classpath:config/liquibase/master.xml

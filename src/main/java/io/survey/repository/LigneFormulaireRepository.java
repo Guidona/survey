@@ -21,4 +21,6 @@ public interface LigneFormulaireRepository extends JpaRepository<LigneFormulaire
 
     List<LigneFormulaire> findByFormulaire_IdOrderByQuestion_ExportOrderAsc(Long formulaireId);
 
+    Boolean existsByFormulaire_IdAndQuestion_Id(Long formulaireId, Long questionId);
+
 }
