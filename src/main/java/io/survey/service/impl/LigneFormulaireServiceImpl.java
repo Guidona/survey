@@ -69,19 +69,20 @@ public class LigneFormulaireServiceImpl implements LigneFormulaireService {
     // Recursive function to save all unsaved parent questions of the given question
     // - Important for questionnaire export
     private void saveAll(LigneFormulaire ligneFormulaire) {
-        questionRepository.findByQuestion_Id(ligneFormulaire.getQuestion().getId())
-                .ifPresent(parentQuestion -> {
-                    if(!ligneFormulaireRepository.existsByFormulaire_IdAndQuestion_Id(
-                            ligneFormulaire.getFormulaire().getId(),
-                            parentQuestion.getId())) {
-                        LigneFormulaire ligne = new LigneFormulaire();
-                        ligne.setFormulaire(ligneFormulaire.getFormulaire());
-                        ligne.setContenu("");
-                        ligne.setQuestion(parentQuestion);
-                        ligne = ligneFormulaireRepository.save(ligne);
-                        saveAll(ligne);
-                    }
-                });
+        questionRepository.findById(ligneFormulaire.getId()).ifPresent(question -> {
+            if(question.getQuestion() != null) {
+                if(!ligneFormulaireRepository.existsByFormulaire_IdAndQuestion_Id(
+                        ligneFormulaire.getFormulaire().getId(),
+                        question.getQuestion().getId())) {
+                    LigneFormulaire ligne = new LigneFormulaire();
+                    ligne.setFormulaire(ligneFormulaire.getFormulaire());
+                    ligne.setContenu("");
+                    ligne.setQuestion(question.getQuestion());
+                    ligne = ligneFormulaireRepository.save(ligne);
+                    saveAll(ligne);
+                }
+            }
+        });
     }
 
     @Override
