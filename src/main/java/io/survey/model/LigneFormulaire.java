@@ -13,6 +13,9 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "ligne_formulaire", uniqueConstraints =
+    @UniqueConstraint(name = "ligne_question_formulaire", columnNames = {"formulaire_id", "question_id"})
+)
 public class LigneFormulaire implements Serializable {
 
     private static final long serialVersionUID = 1L;
