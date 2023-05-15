@@ -6,6 +6,7 @@ import io.survey.service.dto.FormulaireDTO;
 import io.survey.service.dto.export.FlatQuestionnaireFormulaireDTO;
 import io.survey.service.dto.export.QuestionnaireFormulaireDTO;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -24,6 +25,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+@ConditionalOnProperty(prefix = "file-export", name = "enabled")
 @RestController
 @RequestMapping(value = "api/")
 @Slf4j

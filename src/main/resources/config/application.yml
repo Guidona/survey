@@ -13,6 +13,9 @@ spring:
     enabled: false
     change-log: classpath:config/liquibase/master.xml
 
+file-export:
+  enabled: false
+
 #server:
 #  ssl:
 #    key-store-type: JKS
